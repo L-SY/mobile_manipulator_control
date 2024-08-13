@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="robot">
+
+    <xacro:arg name="robot_type" default="diablo"/>
+
+    <xacro:include filename="$(find diablo)/description/urdf/diablo.urdf.xacro"/>
+
+    <gazebo>
+        <plugin name="balance_ros_control" filename="libbalance_hw_sim.so">
+            <robotNamespace>/</robotNamespace>
+            <robotSimType>balance_gazebo/BalanceHWSim</robotSimType>
+        </plugin>
+    </gazebo>
+</robot>

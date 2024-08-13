@@ -1,0 +1,12 @@
+<launch>
+    <arg name="task_name" default="mpc"/>
+
+    <node pkg="balance_mpc_verify" type="legged_balance_dummy_node" name="legged_balance_dummy_node"
+          output="screen" args="$(arg task_name)" launch-prefix="gnome-terminal --"/>
+
+    <node pkg="balance_mpc_verify" type="legged_balance_ipm" name="legged_balance_ipm"
+          output="screen" args="$(arg task_name)" launch-prefix=""/>
+
+    <include file="$(find dynamicx)/launch/visualize.launch"/>
+
+</launch>

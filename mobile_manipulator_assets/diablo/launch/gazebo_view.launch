@@ -1,0 +1,25 @@
+<launch>
+    <param name="robot_description"
+           command="$(find xacro)/xacro $(find diablo)/description/urdf/robot.xacro"/>
+
+    <param name="diablo_description"
+           command="$(find xacro)/xacro $(find diablo)/description/urdf/robot.xacro"/>
+
+    <rosparam file="$(find balance_gazebo)/config/default.yaml" command="load"/>
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="50.0"/>
+    </node>
+
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find balance_gazebo)/worlds/pole_world.world"/>
+        <arg name="paused" value="false"/>
+    </include>
+    <!-- push robot_description to factory and spawn robot in gazebo -->
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" clear_params="true"
+          output="screen"
+          args="-param diablo_description -urdf -model robot
+        -z 0.5
+        "
+    />
+</launch>
