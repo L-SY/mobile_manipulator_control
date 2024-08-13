@@ -163,32 +163,32 @@ struct ControllerSettings
   }
 };
 
-std::ostream& operator<<(std::ostream& out, const ControllerSettings& settings)
-{
-  out << "gravity = " << settings.gravity.transpose() << std::endl
-      << "x0 = " << settings.initial_state.transpose() << std::endl
-      << "input_weight = " << settings.input_weight << std::endl
-      << "state_weight = " << settings.state_weight << std::endl
-      << "end_effector_weight = " << settings.end_effector_weight << std::endl
-      << "input_limit_lower = " << settings.input_limit_lower.transpose() << std::endl
-      << "input_limit_upper = " << settings.input_limit_upper.transpose() << std::endl
-      << "input_limit_mu = " << settings.input_limit_mu << std::endl
-      << "input_limit_delta = " << settings.input_limit_delta << std::endl
-      << "state_limit_lower = " << settings.state_limit_lower.transpose() << std::endl
-      << "state_limit_upper = " << settings.state_limit_upper.transpose() << std::endl
-      << "state_limit_mu = " << settings.state_limit_mu << std::endl
-      << "state_limit_delta = " << settings.state_limit_delta << std::endl
-      << "use_operating_points = " << settings.use_operating_points << std::endl
-      << "robot_urdf_path = " << settings.robot_urdf_path << std::endl
-      << "robot_base_type = " << robot_base_type_to_string(settings.robot_base_type) << std::endl
-      << "end_effector_link_name = " << settings.end_effector_link_name << std::endl
-      << "dims" << std::endl
-      << settings.dims << std::endl
-      << "balancing_settings" << std::endl
-      << settings.balancing_settings << std::endl
-      << "inertial_alignment_settings" << std::endl
-      << settings.inertial_alignment_settings << std::endl;
-  return out;
-}
+//std::ostream& operator<<(std::ostream& out, const ControllerSettings& settings)
+//{
+//  out << "gravity = " << settings.gravity.transpose() << std::endl
+//      << "x0 = " << settings.initial_state.transpose() << std::endl
+//      << "input_weight = " << settings.input_weight << std::endl
+//      << "state_weight = " << settings.state_weight << std::endl
+//      << "end_effector_weight = " << settings.end_effector_weight << std::endl
+//      << "input_limit_lower = " << settings.input_limit_lower.transpose() << std::endl
+//      << "input_limit_upper = " << settings.input_limit_upper.transpose() << std::endl
+//      << "input_limit_mu = " << settings.input_limit_mu << std::endl
+//      << "input_limit_delta = " << settings.input_limit_delta << std::endl
+//      << "state_limit_lower = " << settings.state_limit_lower.transpose() << std::endl
+//      << "state_limit_upper = " << settings.state_limit_upper.transpose() << std::endl
+//      << "state_limit_mu = " << settings.state_limit_mu << std::endl
+//      << "state_limit_delta = " << settings.state_limit_delta << std::endl
+//      << "use_operating_points = " << settings.use_operating_points << std::endl
+//      << "robot_urdf_path = " << settings.robot_urdf_path << std::endl
+//      << "robot_base_type = " << robot_base_type_to_string(settings.robot_base_type) << std::endl
+//      << "end_effector_link_name = " << settings.end_effector_link_name << std::endl
+//      << "dims" << std::endl
+//      << settings.dims << std::endl
+//      << "balancing_settings" << std::endl
+//      << settings.balancing_settings << std::endl
+//      << "inertial_alignment_settings" << std::endl
+//      << settings.inertial_alignment_settings << std::endl;
+//  return out;
+//}
 
 }  // namespace upright

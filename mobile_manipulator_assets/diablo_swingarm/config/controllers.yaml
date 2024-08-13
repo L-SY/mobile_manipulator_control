@@ -3,7 +3,7 @@ controllers:
     type: joint_state_controller/JointStateController
     publish_rate: 100
 
-  upright_controller:
+  mobile_manipulator_controller:
     type: ddt/UprightController
     init_pos:
       x: 0.2
