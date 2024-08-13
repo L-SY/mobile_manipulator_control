@@ -15,7 +15,7 @@
                        mesh_file="package://swing_arm/description/meshes/link1.stl" material_name="silver"
                        inertial_xyz="0.000002 -0.00531 0.034685"/>
 
-    <xacro:create_link name="link2" mass="0.534276"
+    <xacro:create_link name="link2" mass="0.734276"
                        ixx="383700" ixy="-26179.433" ixz="693.218"
                        iyy="1888000" iyz="-585.018" izz="2050000"
                        mesh_file="package://swing_arm/description/meshes/link2.stl" material_name="silver"
