@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="diablo">
     <!-- Include predefined materials -->
-    <xacro:include filename="$(find diablo)/description/urdf/common/materials.xacro"/>
-    <xacro:include filename="$(find diablo)/description/urdf/common/common.xacro"/>
-    <xacro:include filename="$(find diablo)/description/urdf/common/imu.urdf.xacro"/>
+    <xacro:include filename="$(find robot_common)/include/robot_common/utilities/urdf/common.xacro"/>
+    <xacro:include filename="$(find robot_common)/include/robot_common/utilities/urdf/materials.xacro"/>
+    <xacro:include filename="$(find robot_common)/include/robot_common/utilities/urdf/imu.urdf.xacro"/>
 
     <!-- Base Link -->
 <!--    <link name="world"/>-->
 
-    <xacro:create_link name="base_link" mass="11.639" ixx="0.071628" ixy="-5.9879E-09" ixz="-0.00097471"
+    <xacro:create_link name="diablo_base_link" mass="11.639" ixx="0.071628" ixy="-5.9879E-09" ixz="-0.00097471"
                        iyy="0.16274" iyz="-1.6369E-08" izz="0.14673"
                        mesh_file="package://diablo/description/meshes/base_link.STL"
-                       material_name="grey"/>
+                       material_name="grey" scale_factor="1"/>
 
 <!--    <joint name="base_joint" type="prismatic">-->
 <!--        <parent link="world"/>-->
@@ -23,51 +23,51 @@
 
 <!--    <xacro:create_joint name="fixed_world_cat" type="fixed" parent="world" child="base_link" origin_xyz="0 0 0.5"-->
 <!--                        origin_rpy="0 0 0" />-->
-    <xacro:IMU connected_to="base_link" imu_name="base_imu" mesh_file="package://diablo/description/urdf/common/imu.stl" xyz="0.00 0.00 0.00"
+    <xacro:IMU connected_to="diablo_base_link" imu_name="base_imu" mesh_file="package://diablo/description/urdf/common/imu.stl" xyz="0.00 0.00 0.00"
                rpy="0.00 0.00 0.00"/>
 
     <xacro:create_link name="left_motor" mass="1.3837" ixx="0.003352" ixy="2.7785E-09" ixz="-6.5913E-05" iyy="0.0034908"
                        iyz="4.5045E-10" izz="0.0034856"
                        mesh_file="package://diablo/description/meshes/left_motor.STL"
-                       material_name="silver"/>
+                       material_name="silver" scale_factor="1"/>
     <xacro:create_link name="left_leg1" mass="0.10382" ixx="3.6972E-05" ixy="2.4106E-05" ixz="4.3699E-10"
                        iyy="0.00029278" iyz="-4.1243E-11" izz="0.00032532"
                        mesh_file="package://diablo/description/meshes/left_leg1.STL"
-                       material_name="silver"/>
+                       material_name="silver" scale_factor="1"/>
     <xacro:create_link name="left_leg2" mass="0.18218" ixx="4.1372E-05" ixy="5.1445E-09" ixz="-7.3659E-06"
                        iyy="0.00048219" iyz="2.5521E-11" izz="0.00050441"
                        mesh_file="package://diablo/description/meshes/left_leg2.STL"
-                       material_name="silver"/>
+                       material_name="silver" scale_factor="1"/>
     <xacro:create_link name="left_wheel" mass="2.9494" ixx="0.0069338" ixy="2.8693E-09" ixz="4.6779E-09" iyy="0.006934"
                        iyz="-5.0441E-11" izz="0.012567"
                        mesh_file="package://diablo/description/meshes/left_wheel.STL"
-                       material_name="black"/>
+                       material_name="black" scale_factor="1"/>
     <xacro:create_link name="left_leg3" mass="0.071103" ixx="1.6657E-05" ixy="-5.5246E-06" ixz="3.9598E-14"
                        iyy="0.00017966" iyz="-6.5493E-15" izz="0.00019328"
                        mesh_file="package://diablo/description/meshes/left_leg3.STL"
-                       material_name="brown"/>
+                       material_name="brown" scale_factor="1"/>
     <xacro:create_link name="right_motor" mass="1.3838" ixx="0.003352" ixy="-2.6527E-09" ixz="6.5914E-05"
                        iyy="0.0034908" iyz="-7.2968E-10" izz="0.0034856"
                        mesh_file="package://diablo/description/meshes/right_motor.STL"
-                       material_name="silver"/>
+                       material_name="silver" scale_factor="1"/>
     <xacro:create_link name="right_leg1" mass="0.10382" ixx="3.6972E-05" ixy="2.4106E-05" ixz="-4.3686E-10"
                        iyy="0.00029278" iyz="4.1459E-11" izz="0.00032532"
                        mesh_file="package://diablo/description/meshes/right_leg1.STL"
-                       material_name="silver"/>
+                       material_name="silver" scale_factor="1"/>
     <xacro:create_link name="right_leg2" mass="0.18218" ixx="4.1372E-05" ixy="5.1777E-09" ixz="7.3659E-06"
                        iyy="0.00048219" iyz="4.5225E-11" izz="0.00050441"
                        mesh_file="package://diablo/description/meshes/right_leg2.STL"
-                       material_name="silver"/>
+                       material_name="silver" scale_factor="1"/>
     <xacro:create_link name="right_wheel" mass="2.9494" ixx="0.0069339" ixy="-1.3146E-07" ixz="-3.0392E-09"
                        iyy="0.0069339" iyz="-3.5756E-09" izz="0.012567"
                        mesh_file="package://diablo/description/meshes/right_wheel.STL"
-                       material_name="black"/>
+                       material_name="black" scale_factor="1"/>
     <xacro:create_link name="right_leg3" mass="0.071103" ixx="1.6657E-05" ixy="-5.5246E-06" ixz="1.4852E-14"
                        iyy="0.00017966" iyz="-6.5194E-14" izz="0.00019328"
                        mesh_file="package://diablo/description/meshes/right_leg3.STL"
-                       material_name="brown"/>
+                       material_name="brown" scale_factor="1"/>
 
-    <xacro:create_joint name="left_j4" type="continuous" parent="base_link" child="left_motor"
+    <xacro:create_joint name="left_j4" type="continuous" parent="diablo_base_link" child="left_motor"
                         origin_xyz="0 0.18755 0" origin_rpy="1.5708 0.13433 -3.1416" axis_xyz="0 0 1"/>
     <xacro:create_joint name="left_j1" type="continuous" parent="left_motor" child="left_leg1" origin_xyz="0 0 0"
                         origin_rpy="0 0 -2.8729" axis_xyz="0 0 1"/>
@@ -77,7 +77,7 @@
                         origin_xyz="0.14 0 0.0537" origin_rpy="0 0 0.13433" axis_xyz="0 0 1"/>
     <xacro:create_joint name="left_j5" type="continuous" parent="left_motor" child="left_leg3" origin_xyz="0.09 0 0"
                         origin_rpy="0 0 -2.8729" axis_xyz="0 0 1"/>
-    <xacro:create_joint name="right_j4" type="continuous" parent="base_link" child="right_motor"
+    <xacro:create_joint name="right_j4" type="continuous" parent="diablo_base_link" child="right_motor"
                         origin_xyz="0 -0.18755 0" origin_rpy="1.5708 0.13433 3.1416" axis_xyz="0 0 1"/>
     <xacro:create_joint name="right_j1" type="continuous" parent="right_motor" child="right_leg1" origin_xyz="0 0 0"
                         origin_rpy="0 0 -2.8729" axis_xyz="0 0 1"/>
@@ -127,15 +127,21 @@
         <material>Gazebo/Purple</material>
     </gazebo>
     <!-- Define transmissions for each joint -->
-    <xacro:create_transmission prefix="right" joint_name="j1"/>
-    <xacro:create_transmission prefix="right" joint_name="j2"/>
-    <xacro:create_transmission prefix="right" joint_name="j3"/>
-    <xacro:create_transmission prefix="right" joint_name="j4"/>
-    <xacro:create_transmission prefix="right" joint_name="j5"/>
+    <xacro:create_transmission joint_name="right_j1"/>
+    <xacro:create_transmission joint_name="right_j2"/>
+    <xacro:create_transmission joint_name="right_j3"/>
+    <xacro:create_transmission joint_name="right_j4"/>
+    <xacro:create_transmission joint_name="right_j5"/>
 
-    <xacro:create_transmission prefix="left" joint_name="j1"/>
-    <xacro:create_transmission prefix="left" joint_name="j2"/>
-    <xacro:create_transmission prefix="left" joint_name="j3"/>
-    <xacro:create_transmission prefix="left" joint_name="j4"/>
-    <xacro:create_transmission prefix="left" joint_name="j5"/>
+    <xacro:create_transmission joint_name="left_j1"/>
+    <xacro:create_transmission joint_name="left_j2"/>
+    <xacro:create_transmission joint_name="left_j3"/>
+    <xacro:create_transmission joint_name="left_j4"/>
+    <xacro:create_transmission joint_name="left_j5"/>
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/</robotNamespace>
+        </plugin>
+    </gazebo>
 </robot>

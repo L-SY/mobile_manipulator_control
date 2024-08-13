@@ -1,9 +1,9 @@
 <launch>
     <param name="robot_description"
-           command="$(find xacro)/xacro $(find diablo_swingarm)/description/urdf/diablo_manipulator/robot.xacro"/>
+           command="$(find xacro)/xacro $(find diablo_swingarm)/description/urdf/robot.xacro"/>
 
     <param name="wlm_description"
-           command="$(find xacro)/xacro $(find diablo_swingarm)/description/urdf/diablo_manipulator/robot.xacro"/>
+           command="$(find xacro)/xacro $(find diablo_swingarm)/description/urdf/robot.xacro"/>
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="world_name" value="$(find robot_gazebo)/worlds/empty_world.world"/>
