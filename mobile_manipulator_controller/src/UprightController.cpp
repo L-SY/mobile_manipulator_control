@@ -293,6 +293,12 @@ void UprightController::setupMrt()
   ocs2::setThreadPriority(50, mpcThread_);
 }
 
+void UprightController::uprightAvoid(const ros::Time& time, const ros::Duration& period)
+{}
+
+void UprightController::EESpaceLock(const ros::Time& time, const ros::Duration& period)
+{}
+
 void UprightController::normal(const ros::Time& time, const ros::Duration& period)
 {
   static ocs2::vector_t lastOptimizedState(25);

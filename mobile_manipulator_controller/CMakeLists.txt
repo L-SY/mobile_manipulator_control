@@ -70,7 +70,6 @@ add_library(mobile_manipulator_controller
         src/interpolation/MultiJointTrajectory.cpp
         src/synchronized_module/RosReferenceManager.cpp
         src/MobileManipulatorVisualization.cpp
-        src/MobileManipulatorTarget.cpp
 )
 add_dependencies(mobile_manipulator_controller
         ${catkin_EXPORTED_TARGETS}
@@ -91,6 +90,47 @@ add_dependencies(spline_interpolation
 target_link_libraries(spline_interpolation
         ${catkin_LIBRARIES}
 )
+
+# Mobile manipulator target node
+add_executable(mobile_manipulator_target
+        src/MobileManipulatorTarget.cpp
+)
+add_dependencies(mobile_manipulator_target
+        ${PROJECT_NAME}
+        ${catkin_EXPORTED_TARGETS}
+)
+target_link_libraries(mobile_manipulator_target
+        ${catkin_LIBRARIES}
+)
+target_compile_options(mobile_manipulator_target PRIVATE ${OCS2_CXX_FLAGS})
+
+# Dummy node
+add_executable(mobile_manipulator_dummy_node
+        src/verify/DummyManipulatorNode.cpp
+)
+add_dependencies(mobile_manipulator_dummy_node
+        ${PROJECT_NAME}
+        ${catkin_EXPORTED_TARGETS}
+)
+target_link_libraries(mobile_manipulator_dummy_node
+        ${PROJECT_NAME}
+        ${catkin_LIBRARIES}
+)
+target_compile_options(mobile_manipulator_dummy_node PRIVATE ${OCS2_CXX_FLAGS})
+
+## Mpc node
+add_executable(mobile_manipulator_mpc
+        src/verify/MobileManipulatorMpcNode.cpp
+)
+add_dependencies(mobile_manipulator_mpc
+        ${catkin_EXPORTED_TARGETS}
+)
+target_link_libraries(mobile_manipulator_mpc
+        ${PROJECT_NAME}
+        ${catkin_LIBRARIES}
+)
+target_compile_options(mobile_manipulator_mpc PRIVATE ${OCS2_CXX_FLAGS})
+
 
 #############
 ## Install ##
