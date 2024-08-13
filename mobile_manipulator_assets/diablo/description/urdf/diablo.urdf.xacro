@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://ros.org/wiki/xacro" name="diablo">
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
     <!-- Include predefined materials -->
     <xacro:include filename="$(find robot_common)/include/robot_common/utilities/urdf/common.xacro"/>
     <xacro:include filename="$(find robot_common)/include/robot_common/utilities/urdf/materials.xacro"/>
@@ -13,17 +13,7 @@
                        mesh_file="package://diablo/description/meshes/base_link.STL"
                        material_name="grey" scale_factor="1"/>
 
-<!--    <joint name="base_joint" type="prismatic">-->
-<!--        <parent link="world"/>-->
-<!--        <child link="base_link"/>-->
-<!--        <axis xyz="0 0 1"/>-->
-<!--        <limit lower="-1e10" upper="1e10" effort="1000" velocity="0.5"/>-->
-<!--    </joint>-->
-
-
-<!--    <xacro:create_joint name="fixed_world_cat" type="fixed" parent="world" child="base_link" origin_xyz="0 0 0.5"-->
-<!--                        origin_rpy="0 0 0" />-->
-    <xacro:IMU connected_to="diablo_base_link" imu_name="base_imu" mesh_file="package://diablo/description/urdf/common/imu.stl" xyz="0.00 0.00 0.00"
+    <xacro:IMU connected_to="diablo_base_link" imu_name="base_imu" mesh_file="package://robot_common/include/robot_common/utilities/urdf/imu.stl" xyz="0.00 0.00 0.00"
                rpy="0.00 0.00 0.00"/>
 
     <xacro:create_link name="left_motor" mass="1.3837" ixx="0.003352" ixy="2.7785E-09" ixz="-6.5913E-05" iyy="0.0034908"
@@ -67,26 +57,59 @@
                        mesh_file="package://diablo/description/meshes/right_leg3.STL"
                        material_name="brown" scale_factor="1"/>
 
-    <xacro:create_joint name="left_j4" type="continuous" parent="diablo_base_link" child="left_motor"
-                        origin_xyz="0 0.18755 0" origin_rpy="1.5708 0.13433 -3.1416" axis_xyz="0 0 1"/>
-    <xacro:create_joint name="left_j1" type="continuous" parent="left_motor" child="left_leg1" origin_xyz="0 0 0"
-                        origin_rpy="0 0 -2.8729" axis_xyz="0 0 1"/>
-    <xacro:create_joint name="left_j2" type="continuous" parent="left_leg1" child="left_leg2" origin_xyz="0.14 0 0"
-                        origin_rpy="0 0 2.8729" axis_xyz="0 0 1"/>
-    <xacro:create_joint name="left_j3" type="continuous" parent="left_leg2" child="left_wheel"
-                        origin_xyz="0.14 0 0.0537" origin_rpy="0 0 0.13433" axis_xyz="0 0 1"/>
-    <xacro:create_joint name="left_j5" type="continuous" parent="left_motor" child="left_leg3" origin_xyz="0.09 0 0"
-                        origin_rpy="0 0 -2.8729" axis_xyz="0 0 1"/>
-    <xacro:create_joint name="right_j4" type="continuous" parent="diablo_base_link" child="right_motor"
-                        origin_xyz="0 -0.18755 0" origin_rpy="1.5708 0.13433 3.1416" axis_xyz="0 0 1"/>
-    <xacro:create_joint name="right_j1" type="continuous" parent="right_motor" child="right_leg1" origin_xyz="0 0 0"
-                        origin_rpy="0 0 -2.8729" axis_xyz="0 0 1"/>
-    <xacro:create_joint name="right_j2" type="continuous" parent="right_leg1" child="right_leg2" origin_xyz="0.14 0 0"
-                        origin_rpy="0 0 2.8729" axis_xyz="0 0 1"/>
-    <xacro:create_joint name="right_j3" type="continuous" parent="right_leg2" child="right_wheel"
-                        origin_xyz="0.14 0 -0.0537" origin_rpy="0 0 -3.0073" axis_xyz="0 0 1"/>
-    <xacro:create_joint name="right_j5" type="continuous" parent="right_motor" child="right_leg3" origin_xyz="0.09 0 0"
-                        origin_rpy="0 0 -2.8729" axis_xyz="0 0 1"/>
+    <xacro:macro name="chassis" params="fixed_wheel fixed_leg='false'">
+        <xacro:unless value="${fixed_leg}">
+            <xacro:create_joint name="left_j4" type="continuous" parent="diablo_base_link" child="left_motor"
+                                origin_xyz="0 0.18755 0" origin_rpy="1.5708 0.13433 -3.1416" axis_xyz="0 0 1"/>
+            <xacro:create_joint name="left_j1" type="continuous" parent="left_motor" child="left_leg1" origin_xyz="0 0 0"
+                                origin_rpy="0 0 -2.8729" axis_xyz="0 0 1"/>
+            <xacro:create_joint name="left_j2" type="continuous" parent="left_leg1" child="left_leg2" origin_xyz="0.14 0 0"
+                                origin_rpy="0 0 2.8729" axis_xyz="0 0 1"/>
+            <xacro:create_joint name="left_j5" type="continuous" parent="left_motor" child="left_leg3" origin_xyz="0.09 0 0"
+                                origin_rpy="0 0 -2.8729" axis_xyz="0 0 1"/>
+            <xacro:create_joint name="right_j4" type="continuous" parent="diablo_base_link" child="right_motor"
+                                origin_xyz="0 -0.18755 0" origin_rpy="1.5708 0.13433 3.1416" axis_xyz="0 0 1"/>
+            <xacro:create_joint name="right_j1" type="continuous" parent="right_motor" child="right_leg1" origin_xyz="0 0 0"
+                                origin_rpy="0 0 -2.8729" axis_xyz="0 0 1"/>
+            <xacro:create_joint name="right_j2" type="continuous" parent="right_leg1" child="right_leg2" origin_xyz="0.14 0 0"
+                                origin_rpy="0 0 2.8729" axis_xyz="0 0 1"/>
+            <xacro:create_joint name="right_j5" type="continuous" parent="right_motor" child="right_leg3" origin_xyz="0.09 0 0"
+                                origin_rpy="0 0 -2.8729" axis_xyz="0 0 1"/>
+        </xacro:unless>
+
+        <xacro:if value="${fixed_leg}">
+            <xacro:create_joint name="left_j4" type="fixed" parent="diablo_base_link" child="left_motor"
+                                origin_xyz="0 0.18755 0" origin_rpy="1.5708 0.13433 -3.1416" axis_xyz="0 0 1"/>
+            <xacro:create_joint name="left_j1" type="fixed" parent="left_motor" child="left_leg1" origin_xyz="0 0 0"
+                                origin_rpy="0 0 -2.8729" axis_xyz="0 0 1"/>
+            <xacro:create_joint name="left_j2" type="fixed" parent="left_leg1" child="left_leg2" origin_xyz="0.14 0 0"
+                                origin_rpy="0 0 2.8729" axis_xyz="0 0 1"/>
+            <xacro:create_joint name="left_j5" type="fixed" parent="left_motor" child="left_leg3" origin_xyz="0.09 0 0"
+                                origin_rpy="0 0 -2.8729" axis_xyz="0 0 1"/>
+            <xacro:create_joint name="right_j4" type="fixed" parent="diablo_base_link" child="right_motor"
+                                origin_xyz="0 -0.18755 0" origin_rpy="1.5708 0.13433 3.1416" axis_xyz="0 0 1"/>
+            <xacro:create_joint name="right_j1" type="fixed" parent="right_motor" child="right_leg1" origin_xyz="0 0 0"
+                                origin_rpy="0 0 -2.8729" axis_xyz="0 0 1"/>
+            <xacro:create_joint name="right_j2" type="fixed" parent="right_leg1" child="right_leg2" origin_xyz="0.14 0 0"
+                                origin_rpy="0 0 2.8729" axis_xyz="0 0 1"/>
+            <xacro:create_joint name="right_j5" type="fixed" parent="right_motor" child="right_leg3" origin_xyz="0.09 0 0"
+                                origin_rpy="0 0 -2.8729" axis_xyz="0 0 1"/>
+        </xacro:if>
+
+        <xacro:unless value="${fixed_wheel}">
+            <xacro:create_joint name="left_j3" type="continuous" parent="left_leg2" child="left_wheel"
+                                origin_xyz="0.14 0 0.0537" origin_rpy="0 0 0.13433" axis_xyz="0 0 1"/>
+            <xacro:create_joint name="right_j3" type="continuous" parent="right_leg2" child="right_wheel"
+                                origin_xyz="0.14 0 -0.0537" origin_rpy="0 0 -3.0073" axis_xyz="0 0 1"/>
+        </xacro:unless>
+        <xacro:if value="${fixed_wheel}">
+            <xacro:create_joint name="left_j3" type="fixed" parent="left_leg2" child="left_wheel"
+                                origin_xyz="0.14 0 0.0537" origin_rpy="0 0 0.13433" axis_xyz="0 0 1"/>
+            <xacro:create_joint name="right_j3" type="fixed" parent="right_leg2" child="right_wheel"
+                                origin_xyz="0.14 0 -0.0537" origin_rpy="0 0 -3.0073" axis_xyz="0 0 1"/>
+        </xacro:if>
+
+    </xacro:macro>
 
     <gazebo>
         <joint name="close_chain_left" type="revolute">

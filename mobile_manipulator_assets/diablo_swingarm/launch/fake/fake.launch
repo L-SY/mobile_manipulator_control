@@ -6,7 +6,7 @@
 
     <!-- The URDF model of the robot -->
     <arg name="urdfFile"
-         value="$(find diablo_swingarm)/description/urdf/diablo_manipulator/robot_pinocchio.urdf"/>
+         value="$(find diablo_swingarm)/description/urdf/mpc_robot.urdf"/>
     <!-- The task file for the mpc. -->
     <arg name="taskFile" value="$(find diablo_swingarm)/config/task.info"/>
     <!-- The library folder to generate CppAD codegen into -->

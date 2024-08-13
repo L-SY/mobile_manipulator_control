@@ -32,7 +32,7 @@
     <node pkg="mobile_manipulator_controller" type="mobile_manipulator_dummy_node" name="mobile_manipulator_dummy_node"
           output="screen" launch-prefix="gnome-terminal --"/>
 
-    <node if="$(arg rviz)" pkg="mobile_manipulator_controller" type="ddt_mobile_manipulator_target"
-          name="ddt_mobile_manipulator_target"
+    <node if="$(arg rviz)" pkg="mobile_manipulator_controller" type="mobile_manipulator_target"
+          name="mobile_manipulator_target"
           output="screen" launch-prefix=""/>
 </launch>
