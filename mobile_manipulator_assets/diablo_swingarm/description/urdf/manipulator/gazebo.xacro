@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="gazebo">
-    <xacro:include filename="$(find diablo_swingarm)/description/urdf/manipulator/common.xacro"/>
+    <xacro:include filename="$(find robot_common)/include/robot_common/utilities/urdf/common.xacro"/>
 
     <!-- Transmission definitions -->
     <xacro:create_transmission joint_name="joint1"/>
@@ -11,15 +11,8 @@
     <xacro:create_transmission joint_name="joint6"/>
 
     <gazebo>
-        <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
-            <alwaysOn>true</alwaysOn>
-            <updateRate>1000.0</updateRate>
-            <bodyName>arm_base_link</bodyName>
-            <topicName>ground_truth/state</topicName>
-            <gaussianNoise>0</gaussianNoise>
-            <frameName>world</frameName>
-            <xyzOffsets>0 0 0</xyzOffsets>
-            <rpyOffsets>0 0 0</rpyOffsets>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/</robotNamespace>
         </plugin>
     </gazebo>
 </robot>
