@@ -1,13 +1,13 @@
 <launch>
     <arg name="use_mpc" default="true"/>
     <group if="$(arg use_mpc)">
-        <param name="taskFile" value="$(find upright_asset)/config/task.info"/>
-        <param name="libFolder" value="$(find upright_asset)/auto_generated"/>
+        <param name="taskFile" value="$(find diablo_swingarm)/config/task.info"/>
+        <param name="libFolder" value="$(find diablo_swingarm)/auto_generated"/>
         <param name="urdfFile"
-               value="$(find upright_asset)/description/urdf/diablo_manipulator/robot_pinocchio.urdf"/>
+               value="$(find diablo_swingarm)/description/urdf/diablo_manipulator/robot_pinocchio.urdf"/>
     </group>
 
-    <rosparam file="$(find upright_asset)/config/controllers.yaml" command="load"/>
+    <rosparam file="$(find diablo_swingarm)/config/controllers.yaml" command="load"/>
     <node name="controller_loader" pkg="controller_manager" type="controller_manager" output="screen"
           args="load
               controllers/joint_state_controller

@@ -9,7 +9,7 @@ controllers:
       x: 0.2
       y: 0.0
       z: 0.5
-    arm_urdf: /home/lsy/upright_ws/src/upright_asset/description/urdf/manipulator/robot.urdf
+    arm_urdf: /home/lsy/upright_ws/src/diablo_swingarm/description/urdf/manipulator/robot.urdf
     gains:
       joint1: { p: 0, i: 0.0, d: 0, i_clamp_max: 1., i_clamp_min: -1., antiwindup: true, publish_state: true }
       joint2: { p: 0, i: 0.0, d: 0, i_clamp_max: 2., i_clamp_min: -2., antiwindup: true, publish_state: true }

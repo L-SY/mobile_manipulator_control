@@ -8,7 +8,7 @@
     <!-- Enable rviz visualization. -->
     <arg name="rviz" default="true"/>
     <!-- The rviz configuration file to load. -->
-    <arg name="rvizconfig" default="$(find upright_asset)/rviz/mobile_manipulator.rviz"/>
+    <arg name="rvizconfig" default="$(find diablo_swingarm)/rviz/mobile_manipulator.rviz"/>
 
     <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg urdfFile)"/>
     <param name="use_gui" value="true"/>

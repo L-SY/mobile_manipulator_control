@@ -19,7 +19,7 @@
     <param name="libFolder" value="$(arg libFolder)"/>
 
     <group if="$(arg rviz)">
-        <include file="$(find upright_asset)/launch/fake/visualize.launch">
+        <include file="$(find diablo_swingarm)/launch/fake/visualize.launch">
             <arg name="urdfFile" value="$(arg urdfFile)"/>
         </include>
     </group>

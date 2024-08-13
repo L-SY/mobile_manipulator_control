@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="gazebo">
-    <xacro:include filename="$(find upright_asset)/description/urdf/manipulator/common.xacro"/>
+    <xacro:include filename="$(find diablo_swingarm)/description/urdf/manipulator/common.xacro"/>
 
     <!-- Transmission definitions -->
     <xacro:create_transmission joint_name="joint1"/>

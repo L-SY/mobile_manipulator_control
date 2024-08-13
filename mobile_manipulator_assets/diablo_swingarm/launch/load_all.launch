@@ -2,7 +2,7 @@
     <!--    use roslaunch in other terminal-->
     <!--    <include file="$(find diablo_ctrl)/launch/load_diablo_hw.launch"/>-->
 
-    <include file="$(find upright_asset)/launch/load_hw.launch"/>
-    <include file="$(find upright_asset)/launch/load_controller.launch"/>
-    <include file="$(find upright_asset)/launch/rviz_target.launch"/>
+    <include file="$(find diablo_swingarm)/launch/load_hw.launch"/>
+    <include file="$(find diablo_swingarm)/launch/load_controller.launch"/>
+    <include file="$(find diablo_swingarm)/launch/rviz_target.launch"/>
 </launch>

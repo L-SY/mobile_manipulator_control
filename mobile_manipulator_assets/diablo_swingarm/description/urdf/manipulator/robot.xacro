@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://ros.org/wiki/xacro" name="swingboy_v1">
 
-    <xacro:include filename="$(find upright_asset)/description/urdf/manipulator/arm.urdf.xacro"/>
-    <xacro:include filename="$(find upright_asset)/description/urdf/manipulator/gazebo.xacro"/>
+    <xacro:include filename="$(find diablo_swingarm)/description/urdf/manipulator/arm.urdf.xacro"/>
+    <xacro:include filename="$(find diablo_swingarm)/description/urdf/manipulator/gazebo.xacro"/>
 
 </robot>

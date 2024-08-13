@@ -4,7 +4,7 @@
 <!-- |    EDITING THIS FILE BY HAND IS NOT RECOMMENDED                                 | -->
 <!-- =================================================================================== -->
 <robot name="swingboy_v1">
-  <!--    <xacro:include filename="$(find upright_asset)/description/urdf/common/materials.xacro"/>-->
+  <!--    <xacro:include filename="$(find diablo_swingarm)/description/urdf/common/materials.xacro"/>-->
   <link name="arm_base_link">
     <inertial>
       <origin rpy="0 0 0" xyz="0.00006 -0.000046 0.0129"/>
@@ -14,14 +14,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/manipulator/base_link.stl"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/manipulator/base_link.stl"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/manipulator/base_link.stl"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/manipulator/base_link.stl"/>
       </geometry>
     </collision>
   </link>
@@ -34,14 +34,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/manipulator/link1.stl"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/manipulator/link1.stl"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/manipulator/link1.stl"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/manipulator/link1.stl"/>
       </geometry>
     </collision>
   </link>
@@ -54,14 +54,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/manipulator/link2.stl"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/manipulator/link2.stl"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/manipulator/link2.stl"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/manipulator/link2.stl"/>
       </geometry>
     </collision>
   </link>
@@ -74,14 +74,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/manipulator/link3.stl"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/manipulator/link3.stl"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/manipulator/link3.stl"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/manipulator/link3.stl"/>
       </geometry>
     </collision>
   </link>
@@ -94,14 +94,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/manipulator/link4.stl"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/manipulator/link4.stl"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/manipulator/link4.stl"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/manipulator/link4.stl"/>
       </geometry>
     </collision>
   </link>
@@ -114,14 +114,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/manipulator/link5.stl"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/manipulator/link5.stl"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/manipulator/link5.stl"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/manipulator/link5.stl"/>
       </geometry>
     </collision>
   </link>
@@ -134,14 +134,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/manipulator/link6.stl"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/manipulator/link6.stl"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/manipulator/link6.stl"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/manipulator/link6.stl"/>
       </geometry>
     </collision>
   </link>

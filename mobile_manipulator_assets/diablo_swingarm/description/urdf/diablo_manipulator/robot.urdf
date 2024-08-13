@@ -40,14 +40,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/base_link.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/base_link.STL" scale="1 1 1"/>
       </geometry>
       <material name="grey"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/base_link.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/base_link.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -60,14 +60,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/left_motor.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/left_motor.STL" scale="1 1 1"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/left_motor.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/left_motor.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -80,14 +80,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/left_leg1.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/left_leg1.STL" scale="1 1 1"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/left_leg1.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/left_leg1.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -100,14 +100,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/left_leg2.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/left_leg2.STL" scale="1 1 1"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/left_leg2.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/left_leg2.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -120,14 +120,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/left_wheel.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/left_wheel.STL" scale="1 1 1"/>
       </geometry>
       <material name="black"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/left_wheel.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/left_wheel.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -140,14 +140,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/left_leg3.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/left_leg3.STL" scale="1 1 1"/>
       </geometry>
       <material name="brown"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/left_leg3.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/left_leg3.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -160,14 +160,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/right_motor.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/right_motor.STL" scale="1 1 1"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/right_motor.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/right_motor.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -180,14 +180,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/right_leg1.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/right_leg1.STL" scale="1 1 1"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/right_leg1.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/right_leg1.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -200,14 +200,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/right_leg2.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/right_leg2.STL" scale="1 1 1"/>
       </geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/right_leg2.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/right_leg2.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -220,14 +220,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/right_wheel.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/right_wheel.STL" scale="1 1 1"/>
       </geometry>
       <material name="black"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/right_wheel.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/right_wheel.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -240,14 +240,14 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/right_leg3.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/right_leg3.STL" scale="1 1 1"/>
       </geometry>
       <material name="brown"/>
     </visual>
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/diablo/right_leg3.STL" scale="1 1 1"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/diablo/right_leg3.STL" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -335,7 +335,7 @@
       <rpyOffsets>0 0 0</rpyOffsets>
     </plugin>
   </gazebo>
-  <!--    <xacro:include filename="$(find upright_asset)/description/urdf/diablo/imu.xacro"/>-->
+  <!--    <xacro:include filename="$(find diablo_swingarm)/description/urdf/diablo/imu.xacro"/>-->
   <!-- ///////////////////////////////////////   bottom_joint   ////////////////////////////////////////// -->
   <link name="arm_base_link">
     <inertial>
@@ -346,7 +346,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/RM65/base_link.STL"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/RM65/base_link.STL"/>
       </geometry>
       <material name="">
         <color rgba="1 1 1 1"/>
@@ -355,7 +355,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/RM65/base_link.STL"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/RM65/base_link.STL"/>
       </geometry>
     </collision>
   </link>
@@ -368,7 +368,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/RM65/link1.STL"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/RM65/link1.STL"/>
       </geometry>
       <material name="">
         <color rgba="1 1 1 1"/>
@@ -377,7 +377,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/RM65/link1.STL"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/RM65/link1.STL"/>
       </geometry>
     </collision>
   </link>
@@ -398,7 +398,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/RM65/link2.STL"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/RM65/link2.STL"/>
       </geometry>
       <material name="">
         <color rgba="1 1 1 1"/>
@@ -407,7 +407,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/RM65/link2.STL"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/RM65/link2.STL"/>
       </geometry>
     </collision>
   </link>
@@ -428,7 +428,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/RM65/link3.STL"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/RM65/link3.STL"/>
       </geometry>
       <material name="">
         <color rgba="1 1 1 1"/>
@@ -437,7 +437,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/RM65/link3.STL"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/RM65/link3.STL"/>
       </geometry>
     </collision>
   </link>
@@ -458,7 +458,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/RM65/link4.STL"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/RM65/link4.STL"/>
       </geometry>
       <material name="">
         <color rgba="1 1 1 1"/>
@@ -467,7 +467,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/RM65/link4.STL"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/RM65/link4.STL"/>
       </geometry>
     </collision>
   </link>
@@ -488,7 +488,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/RM65/link5.STL"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/RM65/link5.STL"/>
       </geometry>
       <material name="">
         <color rgba="1 1 1 1"/>
@@ -497,7 +497,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/RM65/link5.STL"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/RM65/link5.STL"/>
       </geometry>
     </collision>
   </link>
@@ -518,7 +518,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/RM65/link6.STL"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/RM65/link6.STL"/>
       </geometry>
       <material name="">
         <color rgba="1 1 1 1"/>
@@ -527,7 +527,7 @@
     <collision>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://upright_asset/description/meshes/RM65/link6.STL"/>
+        <mesh filename="package://diablo_swingarm/description/meshes/RM65/link6.STL"/>
       </geometry>
     </collision>
   </link>
@@ -628,7 +628,7 @@
   <!--    <gazebo>-->
   <!--        <plugin name="gazebo_ros_control" filename="libqm_hw_sim.so">-->
   <!--            <robotNamespace>/</robotNamespace>-->
-  <!--            <robotParam>upright_asset</robotParam>-->
+  <!--            <robotParam>diablo_swingarm</robotParam>-->
   <!--            <robotSimType>qm_gazebo/QMHWSim</robotSimType>-->
   <!--        </plugin>-->
   <!--    </gazebo>-->
