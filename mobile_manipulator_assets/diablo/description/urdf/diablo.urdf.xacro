@@ -75,6 +75,17 @@
                                 origin_rpy="0 0 2.8729" axis_xyz="0 0 1"/>
             <xacro:create_joint name="right_j5" type="continuous" parent="right_motor" child="right_leg3" origin_xyz="0.09 0 0"
                                 origin_rpy="0 0 -2.8729" axis_xyz="0 0 1"/>
+
+            <!-- Define transmissions for each joint -->
+            <xacro:create_transmission joint_name="right_j1"/>
+            <xacro:create_transmission joint_name="right_j2"/>
+            <xacro:create_transmission joint_name="right_j4"/>
+            <xacro:create_transmission joint_name="right_j5"/>
+
+            <xacro:create_transmission joint_name="left_j1"/>
+            <xacro:create_transmission joint_name="left_j2"/>
+            <xacro:create_transmission joint_name="left_j4"/>
+            <xacro:create_transmission joint_name="left_j5"/>
         </xacro:unless>
 
         <xacro:if value="${fixed_leg}">
@@ -107,6 +118,9 @@
                                 origin_xyz="0.14 0 0.0537" origin_rpy="0 0 0.13433" axis_xyz="0 0 1"/>
             <xacro:create_joint name="right_j3" type="fixed" parent="right_leg2" child="right_wheel"
                                 origin_xyz="0.14 0 -0.0537" origin_rpy="0 0 -3.0073" axis_xyz="0 0 1"/>
+
+            <xacro:create_transmission joint_name="left_j3"/>
+            <xacro:create_transmission joint_name="right_j3"/>
         </xacro:if>
 
     </xacro:macro>
@@ -149,18 +163,6 @@
     <gazebo reference="right_wheel">
         <material>Gazebo/Purple</material>
     </gazebo>
-    <!-- Define transmissions for each joint -->
-    <xacro:create_transmission joint_name="right_j1"/>
-    <xacro:create_transmission joint_name="right_j2"/>
-    <xacro:create_transmission joint_name="right_j3"/>
-    <xacro:create_transmission joint_name="right_j4"/>
-    <xacro:create_transmission joint_name="right_j5"/>
-
-    <xacro:create_transmission joint_name="left_j1"/>
-    <xacro:create_transmission joint_name="left_j2"/>
-    <xacro:create_transmission joint_name="left_j3"/>
-    <xacro:create_transmission joint_name="left_j4"/>
-    <xacro:create_transmission joint_name="left_j5"/>
 
     <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">

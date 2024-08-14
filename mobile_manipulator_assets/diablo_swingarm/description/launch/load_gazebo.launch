@@ -2,6 +2,11 @@
     <param name="robot_description"
            command="$(find xacro)/xacro $(find diablo_swingarm)/description/urdf/robot.xacro"/>
 
+    <param name="gazebo_description"
+           command="$(find xacro)/xacro $(find diablo_swingarm)/description/urdf/gazebo_robot.xacro"/>
+
+    <rosparam file="$(find diablo_swingarm)/config/gazebo.yaml" command="load"/>
+
     <param name="wlm_description"
            command="$(find xacro)/xacro $(find diablo_swingarm)/description/urdf/robot.xacro"/>
 
@@ -9,10 +14,11 @@
         <arg name="world_name" value="$(find robot_gazebo)/worlds/empty_world.world"/>
         <arg name="paused" value="true"/>
     </include>
+
     <!-- push robot_description to factory and spawn robot in gazebo -->
     <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" clear_params="true"
           output="screen"
-          args="-param wlm_description -urdf -model wlm
+          args="-param gazebo_description -urdf -model wlm
         -z 0.15
         "
     />
