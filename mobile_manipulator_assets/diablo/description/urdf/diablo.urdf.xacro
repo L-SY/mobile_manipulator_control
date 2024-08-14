@@ -67,6 +67,7 @@
                                 origin_rpy="0 0 2.8729" axis_xyz="0 0 1"/>
             <xacro:create_joint name="left_j5" type="continuous" parent="left_motor" child="left_leg3" origin_xyz="0.09 0 0"
                                 origin_rpy="0 0 -2.8729" axis_xyz="0 0 1"/>
+
             <xacro:create_joint name="right_j4" type="continuous" parent="diablo_base_link" child="right_motor"
                                 origin_xyz="0 -0.18755 0" origin_rpy="1.5708 0.13433 3.1416" axis_xyz="0 0 1"/>
             <xacro:create_joint name="right_j1" type="continuous" parent="right_motor" child="right_leg1" origin_xyz="0 0 0"
@@ -112,15 +113,14 @@
                                 origin_xyz="0.14 0 0.0537" origin_rpy="0 0 0.13433" axis_xyz="0 0 1"/>
             <xacro:create_joint name="right_j3" type="continuous" parent="right_leg2" child="right_wheel"
                                 origin_xyz="0.14 0 -0.0537" origin_rpy="0 0 -3.0073" axis_xyz="0 0 1"/>
+            <xacro:create_transmission joint_name="left_j3" hardware_interface="VelocityJointInterface"/>
+            <xacro:create_transmission joint_name="right_j3" hardware_interface="VelocityJointInterface"/>
         </xacro:unless>
         <xacro:if value="${fixed_wheel}">
             <xacro:create_joint name="left_j3" type="fixed" parent="left_leg2" child="left_wheel"
                                 origin_xyz="0.14 0 0.0537" origin_rpy="0 0 0.13433" axis_xyz="0 0 1"/>
             <xacro:create_joint name="right_j3" type="fixed" parent="right_leg2" child="right_wheel"
                                 origin_xyz="0.14 0 -0.0537" origin_rpy="0 0 -3.0073" axis_xyz="0 0 1"/>
-
-            <xacro:create_transmission joint_name="left_j3"/>
-            <xacro:create_transmission joint_name="right_j3"/>
         </xacro:if>
 
     </xacro:macro>
