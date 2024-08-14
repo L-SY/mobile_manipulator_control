@@ -6,14 +6,14 @@ controllers:
   mobile_manipulator_controller:
     type: ddt/UprightController
     init_pos:
-      x: 0.2
+      x: 0.3
       y: 0.0
-      z: 0.5
-    arm_urdf: /home/lsy/upright_ws/src/diablo_swingarm/description/urdf/manipulator/robot.urdf
+      z: 0.3
+    arm_urdf: /home/lsy/mobile_manipulator_control/src/mobile_manipulator_assets/swing_arm/description/urdf/robot.urdf
     gains:
-      joint1: { p: 0, i: 0.0, d: 0, i_clamp_max: 1., i_clamp_min: -1., antiwindup: true, publish_state: true }
-      joint2: { p: 0, i: 0.0, d: 0, i_clamp_max: 2., i_clamp_min: -2., antiwindup: true, publish_state: true }
-      joint3: { p: 0, i: 0.0, d: 0, i_clamp_max: 2, i_clamp_min: -2., antiwindup: true, publish_state: true }
-      joint4: { p: 0, i: 0.0, d: 0., i_clamp_max: 1, i_clamp_min: -1, antiwindup: true, publish_state: true }
-      joint5: { p: 0., i: 0., d: 0., i_clamp_max: 1, i_clamp_min: -1, antiwindup: true, publish_state: true }
-      joint6: { p: 0., i: 0., d: 0., i_clamp_max: 0.5, i_clamp_min: -0.5, antiwindup: true, publish_state: true }
+      joint1: { p: 10, i: 0.0, d: 0.2, i_clamp_max: 0., i_clamp_min: 0.., antiwindup: true, publish_state: true }
+      joint2: { p: 10, i: 0.0, d: 0.2, i_clamp_max: 0., i_clamp_min: 0., antiwindup: true, publish_state: true }
+      joint3: { p: 10, i: 0.0, d: 0.2, i_clamp_max: 0., i_clamp_min: 0., antiwindup: true, publish_state: true }
+      joint4: { p: 3, i: 0.0, d: 0.04, i_clamp_max: 0., i_clamp_min: 0, antiwindup: true, publish_state: true }
+      joint5: { p: 1, i: 0., d: 0.04, i_clamp_max: 0., i_clamp_min: 0, antiwindup: true, publish_state: true }
+      joint6: { p: 0.5, i: 0., d: 0.01, i_clamp_max: 0., i_clamp_min: 0., antiwindup: true, publish_state: true }

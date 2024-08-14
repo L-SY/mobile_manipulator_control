@@ -54,7 +54,7 @@ struct TimeData
 
 class UprightController
   : public controller_interface::MultiInterfaceController<hardware_interface::VelocityJointInterface,
-                                                          hardware_interface::EffortJointInterface>
+                                                          hardware_interface::EffortJointInterface,hardware_interface::HybridJointInterface>
 {
   enum ControllerState
   {
@@ -125,7 +125,7 @@ private:
   int controlState_ = UPRIGHT;
   std::thread mpcThread_;
 
-  ros::Publisher optimizedStateTrajectoryPub_;
+  ros::Publisher optimizedStateTrajectoryPub_, gravityCompPub_;
   std::atomic_bool controllerRunning_{}, mpcRunning_{};
   ocs2::benchmark::RepeatedTimer mpcTimer_;
 

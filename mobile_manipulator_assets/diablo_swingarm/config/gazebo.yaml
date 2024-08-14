@@ -13,3 +13,7 @@ gazebo:
     - joint4
     - joint5
     - joint6
+  base_vel:
+    - baseX
+    - baseY
+    - baseYaw

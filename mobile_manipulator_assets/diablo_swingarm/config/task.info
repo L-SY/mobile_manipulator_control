@@ -72,21 +72,21 @@ rollout
   RelTolODE                       1e-3
   timeStep                        1e-2
   integratorType                  ODE45
-  maxNumStepsPerSecond            100000
+  maxNumStepsPerSecond            1000
   checkNumericalStability         false
 }
 
 ; MPC settings
 mpc
 {
-  timeHorizon                     1 ; [s]
+  timeHorizon                     3 ; [s]
   solutionTimeWindow              0.2   ; [s]
   coldStart                       false
 
   debugPrint                      false
 
-  mpcDesiredFrequency             100   ; [Hz]
-  mrtDesiredFrequency             200   ; [Hz]
+  mpcDesiredFrequency             300   ; [Hz]
+  mrtDesiredFrequency             500   ; [Hz]
 }
 
 ; settings for the sequential quadratic programming solver
@@ -116,14 +116,14 @@ Cost
   {
     scaling 1e-3         ; scaling coefficient for the whole weight matrix
     ; weight matrix diagonal
-    (0,0) 0    ; M(0,0)
-    (1,1) 0    ; M(1,1)
-    (2,2) 0    ; M(2,2)
-    (3,3) 1.0    ; M(3,3)
-    (4,4) 1.0    ; M(4,4)
-    (5,5) 1.0    ; M(5,5)
-    (6,6) 1.0    ; M(6,6)
-    (7,7) 1.0    ; M(7,7)
+    (0,0) 1000    ; M(0,0)
+    (1,1) 1000    ; M(1,1)
+    (2,2) 10.0    ; M(2,2)
+    (3,3) 10.0    ; M(3,3)
+    (4,4) 10.0    ; M(4,4)
+    (5,5) 10.0    ; M(5,5)
+    (6,6) 10.0    ; M(6,6)
+    (7,7) 10.0    ; M(7,7)
   }
   state  ; state weight
   {
@@ -141,8 +141,8 @@ Cost
     (8,8) 0.2    ; M(8,8)
 
     ; the vel weight
-    (9,9) 10.0   ; M(9,9)
-    (10,10) 10.0 ; M(10,10)
+    (9,9) 10000.0   ; M(9,9)
+    (10,10) 10000.0 ; M(10,10)
     (11,11) 1.0 ; M(11,11)
     (12,12) 1.0 ; M(12,12)
     (13,13) 1.0 ; M(13,13)
@@ -151,18 +151,18 @@ Cost
     (16,16) 1.0 ; M(16,16)
 
     ; the acc weight
-    (17,17) 10.0  ; M(17,17)
-    (18,18) 10.0  ; M(18,18)
-    (19,19) 0.0  ; M(19,19)
-    (20,20) 0.0  ; M(20,20)
-    (21,21) 0.0  ; M(21,21)
-    (22,22) 0.0  ; M(22,22)
-    (23,23) 0.0  ; M(23,23)
-    (24,24) 0.0  ; M(24,24)
+    (17,17) 10000.0  ; M(17,17)
+    (18,18) 10000.0  ; M(18,18)
+    (19,19) 5.0  ; M(19,19)
+    (20,20) 5.0  ; M(20,20)
+    (21,21) 5.0  ; M(21,21)
+    (22,22) 5.0  ; M(22,22)
+    (23,23) 5.0  ; M(23,23)
+    (24,24) 5.0  ; M(24,24)
   }
   end_effector  ; EE pose weight
   {
-    scaling 1e+4
+    scaling 1e+5
     ; 3 position DOFs, 3 orientation DOFs
     (0,0) 2.0    ; M(0,0)
     (1,1) 1.0    ; M(1,1)
@@ -337,7 +337,7 @@ Constraint
 
 inertial_alignment
 {
-  cost_enabled true
+  cost_enabled false
   constraint_enabled false
   ; take angular acceleration into account (only has an affect if com has non-zero height)
   use_angular_acceleration true

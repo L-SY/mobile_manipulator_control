@@ -3,8 +3,7 @@
     <group if="$(arg use_mpc)">
         <param name="taskFile" value="$(find diablo_swingarm)/config/task.info"/>
         <param name="libFolder" value="$(find diablo_swingarm)/auto_generated"/>
-        <param name="urdfFile"
-               value="$(find diablo_swingarm)/description/urdf/diablo_manipulator/robot_pinocchio.urdf"/>
+        <param name="urdfFile" value="$(find diablo_swingarm)/description/urdf/mpc_robot.urdf"/>
     </group>
 
     <rosparam file="$(find diablo_swingarm)/config/controllers.yaml" command="load"/>

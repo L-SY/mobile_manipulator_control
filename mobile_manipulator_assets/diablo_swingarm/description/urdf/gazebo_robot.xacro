@@ -21,9 +21,17 @@
         <xacro:chassis fixed_wheel="$(arg fixed_wheel)" fixed_leg="$(arg fixed_leg)"/>
     </xacro:if>
 
+<!--    <gazebo>-->
+<!--        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">-->
+<!--            <robotNamespace>/</robotNamespace>-->
+<!--            <robotParam>mobile_manipulator_description</robotParam>-->
+<!--        </plugin>-->
+<!--    </gazebo>-->
     <gazebo>
-        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+        <plugin name="gazebo_ros_control" filename="libmobile_manipulator_hw_sim.so">
             <robotNamespace>/</robotNamespace>
+            <robotParam>mobile_manipulator_description</robotParam>
+            <robotSimType>mobile_manipulator_gazebo/MobileManipulatorHWSim</robotSimType>
         </plugin>
     </gazebo>
 </robot>

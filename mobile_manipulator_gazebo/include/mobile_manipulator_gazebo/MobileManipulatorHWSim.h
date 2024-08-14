@@ -17,6 +17,13 @@ struct HybridJointData
   double posDes_{}, velDes_{}, kp_{}, kd_{}, ff_{};
 };
 
+struct BaseVelData
+{
+  std::string name_;
+  double pos_, vel_, tau_;  // state
+  double velDes_;           // command
+};
+
 struct HybridJointCommand
 {
   ros::Time stamp_;
@@ -50,9 +57,10 @@ private:
   hardware_interface::ImuSensorInterface imuSensorInterface_;
   std::list<ImuData> imuDatas_;
 
-  std::vector<std::string> hybridJoints_;
+  std::vector<std::string> hybridJoints_, baseVelNames_;
   hardware_interface::HybridJointInterface hybridJointInterface_;
   std::list<HybridJointData> hybridJointDatas_;
+  std::list<BaseVelData> baseVelDates_;
   std::unordered_map<std::string, std::deque<HybridJointCommand>> cmdBuffer_;
 
   double delay_{};

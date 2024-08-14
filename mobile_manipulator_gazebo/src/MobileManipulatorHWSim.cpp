@@ -13,8 +13,12 @@ bool MobileManipulatorHWSim::initSim(const std::string& robot_namespace, ros::No
   if (!model_nh.getParam("gazebo/hybrid_joints", hybridJoints_))
   {
     ROS_INFO_STREAM("Parameter 'gazebo/hybrid_joints' not found, using default values.");
+  }
+  else
+  {
     for (const auto& name : hybridJoints_)
     {
+      ROS_INFO_STREAM(name);
       hybridJointDatas_.push_back(HybridJointData{ .joint_ = ej_interface_.getHandle(name) });
       HybridJointData& back = hybridJointDatas_.back();
       hybridJointInterface_.registerHandle(hardware_interface::HybridJointHandle(
@@ -23,6 +27,25 @@ bool MobileManipulatorHWSim::initSim(const std::string& robot_namespace, ros::No
     }
   }
 
+  if (!model_nh.getParam("gazebo/base_vel", baseVelNames_))
+  {
+    ROS_INFO_STREAM("Parameter 'gazebo/base_vel' not found, using default values.");
+  }
+  else
+  {
+    for (const auto& name : baseVelNames_)
+    {
+      baseVelDates_.push_back(BaseVelData{ .name_ = name});
+      hardware_interface::JointStateHandle state_handle(baseVelDates_.back().name_, &baseVelDates_.back().pos_, &baseVelDates_.back().vel_, &baseVelDates_.back().tau_);
+      baseVelDates_.back().pos_ = 0;
+      baseVelDates_.back().vel_ = 0;
+      baseVelDates_.back().tau_ = 0;
+      js_interface_.registerHandle(state_handle);
+      hardware_interface::JointHandle joint_handle(state_handle, &baseVelDates_.back().velDes_);
+      vj_interface_.registerHandle(joint_handle);
+      ROS_INFO_STREAM(name);
+    }
+  }
   registerInterface(&robotStateInterface_);
   registerInterface(&imuSensorInterface_);
   XmlRpc::XmlRpcValue xmlRpcValue;
@@ -69,7 +92,7 @@ bool MobileManipulatorHWSim::initSim(const std::string& robot_namespace, ros::No
   }
   else
   {
-    ROS_WARN("No joint initial positions specified");
+    ROS_INFO_STREAM("No joint initial positions specified");
   }
   return ret;
 }

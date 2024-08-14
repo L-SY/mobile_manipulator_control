@@ -1,4 +1,4 @@
-<library path="lib/libupright_controller">
+<library path="lib/libmobile_manipulator_controller">
 
     <class name="ddt/UprightController" type="ddt::UprightController"
            base_class_type="controller_interface::ControllerBase">

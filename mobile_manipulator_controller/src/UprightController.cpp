@@ -37,7 +37,6 @@ bool UprightController::init(hardware_interface::RobotHW* robot_hw, ros::NodeHan
 
   jointVelLast_.resize(10);
   lastTime_ = ros::Time::now();
-
   // Hardware interface
   auto* velocityJointInterface = robot_hw->get<hardware_interface::VelocityJointInterface>();
   velocityJointHandles_.push_back(velocityJointInterface->getHandle("baseX"));
@@ -55,7 +54,6 @@ bool UprightController::init(hardware_interface::RobotHW* robot_hw, ros::NodeHan
   }
 
   controlState_ = UPRIGHT;
-
   // Odom TF
   odom2base_.header.frame_id = "world";
   odom2base_.header.stamp = ros::Time::now();
@@ -81,7 +79,6 @@ bool UprightController::init(hardware_interface::RobotHW* robot_hw, ros::NodeHan
   optimizedStateTrajectoryPub_ =
       nh.advertise<ocs2_msgs::mpc_flattened_controller>("/mobile_manipulator_mpc_policy", 10);
   ROS_INFO_STREAM("UprightController Init Finish!");
-
   // Use for gravity compensation
   std::string armURDFFile;
   controller_nh.getParam("arm_urdf", armURDFFile);
@@ -92,8 +89,9 @@ bool UprightController::init(hardware_interface::RobotHW* robot_hw, ros::NodeHan
   endEffectorInterface_ =
       std::make_shared<arm_pinocchio::EndEffectorInterface<double>>(*pinocchioInterface_, endEffectorName);
   endEffectorInterface_->setPinocchioInterface(*pinocchioInterface_);
-
-  // Low level controller
+  gravityCompPub_ = nh.advertise<std_msgs::Float64MultiArray>("/gravity_compensation", 10);
+// Low level controller
+// Use for MIT Motor controller
   std::vector<std::string> joint_names = { "joint1", "joint2", "joint3", "joint4", "joint5", "joint6" };
   pids_.resize(joint_names.size());
   for (unsigned int i = 0; i < pids_.size(); ++i)
@@ -350,8 +348,11 @@ void UprightController::upright(const ros::Time& time, const ros::Duration& peri
   optimizedStateTrajectoryPub_.publish(mpcPolicyMsg);
 
   //  for diablo control
-  velocityJointHandles_[0].setCommand(optimizedState(9));
-  velocityJointHandles_[2].setCommand(optimizedState(10));
+//  velocityJointHandles_[0].setCommand(optimizedState(9));
+//  velocityJointHandles_[2].setCommand(optimizedState(10));
+
+  velocityJointHandles_[0].setCommand(0);
+  velocityJointHandles_[2].setCommand(0);
 
   ocs2::PrimalSolution wholeSolution = mpcMrtInterface_->getPolicy();
   auto stateTrajectory = wholeSolution.stateTrajectory_;
@@ -394,7 +395,7 @@ void UprightController::upright(const ros::Time& time, const ros::Duration& peri
   }
 
   splineTrajectory_ = std::make_shared<interpolation::MultiJointTrajectory>(jointTrajectorys);
-
+  std_msgs::Float64MultiArray gravityMsg;
   for (int i = 0; i < 6; ++i)
   {
 //    double posError = wholeSolution.stateTrajectory_[2](3 + i) - effortJointHandles_[i].getPosition();
@@ -404,10 +405,12 @@ void UprightController::upright(const ros::Time& time, const ros::Duration& peri
 //    double commanded_effort =
 //        pids_[i].computeCommand(desJointStates.position - effortJointHandles_[i].getPosition(), period);
     double gravityFF = endEffectorInterface_->getDynamics().G(i);
+    gravityMsg.data.push_back(gravityFF);
 //    effortJointHandles_[i].setCommand(commanded_effort + gravityFF);
 
-    hybridJointHandles_[i].setCommand(wholeSolution.stateTrajectory_[1](3 + i), optimizedState(11 + i), 0, 3, gravityFF);
+    hybridJointHandles_[i].setCommand(wholeSolution.stateTrajectory_[2](3 + i), wholeSolution.stateTrajectory_[2](11 + i), pids_[i].getGains().p_gain_, pids_[i].getGains().d_gain_, gravityFF);
   }
+  gravityCompPub_.publish(gravityMsg);
   lastOptimizedState = optimizedState;
 }
 
