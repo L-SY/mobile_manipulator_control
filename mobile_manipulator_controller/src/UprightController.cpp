@@ -40,16 +40,18 @@ bool UprightController::init(hardware_interface::RobotHW* robot_hw, ros::NodeHan
 
   // Hardware interface
   auto* velocityJointInterface = robot_hw->get<hardware_interface::VelocityJointInterface>();
-  velocityJointHandles_.push_back(velocityJointInterface->getHandle("diabloX"));
-  velocityJointHandles_.push_back(velocityJointInterface->getHandle("diabloY"));
-  velocityJointHandles_.push_back(velocityJointInterface->getHandle("diabloYaw"));
+  velocityJointHandles_.push_back(velocityJointInterface->getHandle("baseX"));
+  velocityJointHandles_.push_back(velocityJointInterface->getHandle("baseY"));
+  velocityJointHandles_.push_back(velocityJointInterface->getHandle("baseYaw"));
 
   auto* effortJointInterface = robot_hw->get<hardware_interface::EffortJointInterface>();
+  auto* hybridJointInterface = robot_hw->get<hardware_interface::HybridJointInterface>();
   std::vector<std::string> swingboyJointNames{ "joint1", "joint2", "joint3", "joint4", "joint5", "joint6" };
 
   for (const auto& joint_name : swingboyJointNames)
   {
-    effortJointHandles_.push_back(effortJointInterface->getHandle(joint_name));
+//    effortJointHandles_.push_back(effortJointInterface->getHandle(joint_name));
+    hybridJointHandles_.push_back(hybridJointInterface->getHandle(joint_name));
   }
 
   controlState_ = UPRIGHT;
@@ -125,10 +127,15 @@ void UprightController::update(const ros::Time& time, const ros::Duration& perio
 
   std::vector<double> q;
   std::vector<double> v;
-  for (auto& effortJointHandle : effortJointHandles_)
+//  for (auto& effortJointHandle : effortJointHandles_)
+//  {
+//    q.push_back(effortJointHandle.getPosition());
+//    v.push_back(effortJointHandle.getVelocity());
+//  }
+  for (auto& hybridJointHandle : hybridJointHandles_)
   {
-    q.push_back(effortJointHandle.getPosition());
-    v.push_back(effortJointHandle.getVelocity());
+    q.push_back(hybridJointHandle.getPosition());
+    v.push_back(hybridJointHandle.getVelocity());
   }
   Eigen::VectorXd q_eigen = Eigen::VectorXd::Map(q.data(), q.size());
   Eigen::VectorXd v_eigen = Eigen::VectorXd::Map(v.data(), v.size());
@@ -191,8 +198,10 @@ void UprightController::updateStateEstimation(const ros::Time& time, const ros::
   //  arm info
   for (int i = 0; i < 6; ++i)
   {
-    currentObservation_.state(3 + i) = effortJointHandles_[i].getPosition();
-    currentObservation_.state(11 + i) = effortJointHandles_[i].getVelocity();
+//    currentObservation_.state(3 + i) = effortJointHandles_[i].getPosition();
+//    currentObservation_.state(11 + i) = effortJointHandles_[i].getVelocity();
+      currentObservation_.state(3 + i) = hybridJointHandles_[i].getPosition();
+      currentObservation_.state(11 + i) = hybridJointHandles_[i].getVelocity();
     //  All accs are set to zero due to ros:: inaccurate and unstable time
     currentObservation_.state(19 + i) = 0.;
   }
@@ -349,7 +358,23 @@ void UprightController::upright(const ros::Time& time, const ros::Duration& peri
   auto timeTrajectory = wholeSolution.timeTrajectory_;
   // Creat Spline
   std::map<int, std::vector<interpolation::CubicSpline::Node>> jointTrajectorys;
-  for (size_t i = 0; i < effortJointHandles_.size(); ++i)
+//  for (size_t i = 0; i < effortJointHandles_.size(); ++i)
+//  {
+//    int jointId = static_cast<int>(i);
+//    std::vector<interpolation::CubicSpline::Node> trajectoryPoints;
+//    for (size_t j = 0; j < stateTrajectory.size(); ++j)
+//    {
+//      if (3 + i >= stateTrajectory[j].size() || 11 + i >= stateTrajectory[j].size())
+//      {
+//        throw std::out_of_range("State trajectory index out of range.");
+//      }
+//      interpolation::CubicSpline::Node jointPoint{};
+//      jointPoint.position = stateTrajectory[j](3 + i);
+//      jointPoint.velocity = stateTrajectory[j](11 + i);
+//      jointPoint.time = timeTrajectory[j];
+//      trajectoryPoints.push_back(jointPoint);
+//    }
+  for (size_t i = 0; i < hybridJointHandles_.size(); ++i)
   {
     int jointId = static_cast<int>(i);
     std::vector<interpolation::CubicSpline::Node> trajectoryPoints;
@@ -372,16 +397,16 @@ void UprightController::upright(const ros::Time& time, const ros::Duration& peri
 
   for (int i = 0; i < 6; ++i)
   {
-    double posError = wholeSolution.stateTrajectory_[2](3 + i) - effortJointHandles_[i].getPosition();
-    double velError = optimizedState(11 + i) - effortJointHandles_[i].getVelocity();
-    //    double commanded_effort = pids_[i].computeCommand(posError, period);
-    auto desJointStates = splineTrajectory_->getStateAtTime(time_data_.readFromRT()->uptime.toSec() + 0.03)[i];
-    double commanded_effort =
-        pids_[i].computeCommand(desJointStates.position - effortJointHandles_[i].getPosition(), period);
+//    double posError = wholeSolution.stateTrajectory_[2](3 + i) - effortJointHandles_[i].getPosition();
+//    double velError = optimizedState(11 + i) - effortJointHandles_[i].getVelocity();
+//    double commanded_effort = pids_[i].computeCommand(posError, period);
+//    auto desJointStates = splineTrajectory_->getStateAtTime(time_data_.readFromRT()->uptime.toSec() + 0.01)[i];
+//    double commanded_effort =
+//        pids_[i].computeCommand(desJointStates.position - effortJointHandles_[i].getPosition(), period);
     double gravityFF = endEffectorInterface_->getDynamics().G(i);
-    //    ROS_INFO_STREAM(gravityFF);
-    effortJointHandles_[i].setCommand(commanded_effort + gravityFF);
-    //    effortJointHandles_[i].setCommand(commanded_effort);
+//    effortJointHandles_[i].setCommand(commanded_effort + gravityFF);
+
+    hybridJointHandles_[i].setCommand(wholeSolution.stateTrajectory_[1](3 + i), optimizedState(11 + i), 0, 3, gravityFF);
   }
   lastOptimizedState = optimizedState;
 }

@@ -7,6 +7,7 @@
 #include <controller_interface/multi_interface_controller.h>
 #include <position_controllers/joint_group_position_controller.h>
 #include <hardware_interface/joint_command_interface.h>
+#include <robot_common/interface/hardware_interface/HybridJointInterface.h>
 #include <control_toolbox/pid.h>
 
 #include <ocs2_core/Types.h>
@@ -136,6 +137,7 @@ private:
   ros::Time lastTime_{};
 
   double init_x_, init_y_, init_z_;
+  std::vector<hardware_interface::HybridJointHandle> hybridJointHandles_;
   std::vector<hardware_interface::JointHandle> effortJointHandles_;
   std::vector<hardware_interface::JointHandle> velocityJointHandles_;
 
