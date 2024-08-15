@@ -10,8 +10,8 @@
 
     <xacro:create_link name="diablo_base_link" mass="11.639" ixx="0.071628" ixy="-5.9879E-09" ixz="-0.00097471"
                        iyy="0.16274" iyz="-1.6369E-08" izz="0.14673"
-                       mesh_file="package://diablo/description/meshes/base_link.STL"
-                       material_name="grey" scale_factor="1"/>
+                       mesh_file="package://diablo/description/meshes/base_link.stl"
+                       material_name="grey" scale_factor="1" vision_scale_x="0.1" vision_scale_y="0.1" vision_scale_z="0.1"/>
 
     <xacro:IMU connected_to="diablo_base_link" imu_name="base_imu" mesh_file="package://robot_common/include/robot_common/utilities/urdf/imu.stl" xyz="0.00 0.00 0.00"
                rpy="0.00 0.00 0.00"/>
