@@ -408,7 +408,7 @@ void UprightController::upright(const ros::Time& time, const ros::Duration& peri
     gravityMsg.data.push_back(gravityFF);
 //    effortJointHandles_[i].setCommand(commanded_effort + gravityFF);
 
-    hybridJointHandles_[i].setCommand(wholeSolution.stateTrajectory_[2](3 + i), wholeSolution.stateTrajectory_[2](11 + i), pids_[i].getGains().p_gain_, pids_[i].getGains().d_gain_, gravityFF);
+    hybridJointHandles_[i].setCommand(wholeSolution.stateTrajectory_[8](3 + i), wholeSolution.stateTrajectory_[8](11 + i), pids_[i].getGains().p_gain_, pids_[i].getGains().d_gain_, gravityFF);
   }
   gravityCompPub_.publish(gravityMsg);
   lastOptimizedState = optimizedState;
