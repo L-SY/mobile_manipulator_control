@@ -9,6 +9,7 @@
 #include <hardware_interface/joint_command_interface.h>
 #include <robot_common/interface/hardware_interface/HybridJointInterface.h>
 #include <control_toolbox/pid.h>
+#include <robot_common/utilities/lp_filter.h>
 
 #include <ocs2_core/Types.h>
 #include <ocs2_core/misc/Benchmark.h>
@@ -111,7 +112,10 @@ protected:
   std::vector<hardware_interface::JointHandle> jointHandles_;
 
   // State Estimation
-  ocs2::SystemObservation currentObservation_;
+  ocs2::SystemObservation currentObservation_, lastObservation_;
+  bool updatePolicy_ = false;
+  //only use in gazebo
+  std::vector<LowPassFilter> velLPFs_;
 
   // Nonlinear MPC
   std::unique_ptr<ocs2::MultipleShootingMpc> mpc_;
@@ -125,7 +129,7 @@ private:
   int controlState_ = UPRIGHT;
   std::thread mpcThread_;
 
-  ros::Publisher optimizedStateTrajectoryPub_, gravityCompPub_;
+  ros::Publisher optimizedStateTrajectoryPub_, gravityCompPub_, velLPFPub_;
   std::atomic_bool controllerRunning_{}, mpcRunning_{};
   ocs2::benchmark::RepeatedTimer mpcTimer_;
 

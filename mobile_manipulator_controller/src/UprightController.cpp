@@ -34,7 +34,16 @@ bool UprightController::init(hardware_interface::RobotHW* robot_hw, ros::NodeHan
   currentObservation_.time = 0.0;
   currentObservation_.state.setZero(STATE_DIM);
   currentObservation_.input.setZero(INPUT_DIM);
+  lastObservation_ = currentObservation_;
 
+  double lp_cutoff_frequency;
+  if (!controller_nh.getParam("lp_cutoff_frequency", lp_cutoff_frequency))
+  {
+    lp_cutoff_frequency = 100;
+  }
+  for (int i = 0; i < 6; ++i) {
+    velLPFs_.emplace_back(lp_cutoff_frequency);
+  }
   jointVelLast_.resize(10);
   lastTime_ = ros::Time::now();
   // Hardware interface
@@ -90,6 +99,7 @@ bool UprightController::init(hardware_interface::RobotHW* robot_hw, ros::NodeHan
       std::make_shared<arm_pinocchio::EndEffectorInterface<double>>(*pinocchioInterface_, endEffectorName);
   endEffectorInterface_->setPinocchioInterface(*pinocchioInterface_);
   gravityCompPub_ = nh.advertise<std_msgs::Float64MultiArray>("/gravity_compensation", 10);
+  velLPFPub_ = nh.advertise<std_msgs::Float64MultiArray>("/vel_lowpass_out", 10);
 // Low level controller
 // Use for MIT Motor controller
   std::vector<std::string> joint_names = { "joint1", "joint2", "joint3", "joint4", "joint5", "joint6" };
@@ -193,16 +203,31 @@ void UprightController::updateStateEstimation(const ros::Time& time, const ros::
   currentObservation_.state(17) = 0;
   currentObservation_.state(18) = 0;
 
+  std_msgs::Float64MultiArray velOutMsg;
   //  arm info
   for (int i = 0; i < 6; ++i)
   {
-//    currentObservation_.state(3 + i) = effortJointHandles_[i].getPosition();
-//    currentObservation_.state(11 + i) = effortJointHandles_[i].getVelocity();
       currentObservation_.state(3 + i) = hybridJointHandles_[i].getPosition();
-      currentObservation_.state(11 + i) = hybridJointHandles_[i].getVelocity();
+//      velLPFs_[i].input(hybridJointHandles_[i].getVelocity());
+//      currentObservation_.state(11 + i) = velLPFs_[i].output();
+//      currentObservation_.state(11 + i) = hybridJointHandles_[i].getVelocity();
     //  All accs are set to zero due to ros:: inaccurate and unstable time
-    currentObservation_.state(19 + i) = 0.;
+      velOutMsg.data.push_back(velLPFs_[i].output());
+      double dt = ros::Time::now().toSec() - lastObservation_.time;
+//      currentObservation_.state(19 + i) = (currentObservation_.state(11 + i) - lastObservation_.state(11 + i))/dt;
+      if (updatePolicy_)
+      {
+        currentObservation_.state(3 + i) = mpcMrtInterface_.get()->getPolicy().stateTrajectory_[1](3 + i);
+        currentObservation_.state(19 + i) = mpcMrtInterface_.get()->getPolicy().stateTrajectory_[1](19 + i);
+      }
+      else
+      {
+        currentObservation_.state(3 + i) = 0;
+        currentObservation_.state(19 + i) =0.;
+      }
   }
+  velLPFPub_.publish(velOutMsg);
+  lastObservation_ = currentObservation_;
   currentObservation_.time += period.toSec();
 }
 
@@ -312,7 +337,6 @@ void UprightController::normal(const ros::Time& time, const ros::Duration& perio
 
   // Load the latest MPC policy
   mpcMrtInterface_->updatePolicy();
-
   // Evaluate the current policy
   ocs2::vector_t optimizedState, optimizedInput;
   size_t plannedMode = 0;  // The mode that is active at the time the policy is evaluated at.
@@ -336,6 +360,7 @@ void UprightController::upright(const ros::Time& time, const ros::Duration& peri
 
   // Load the latest MPC policy
   mpcMrtInterface_->updatePolicy();
+  updatePolicy_ = true;
   // Evaluate the current policy
   ocs2::vector_t optimizedState, optimizedInput;
   size_t plannedMode = 0;  // The mode that is active at the time the policy is evaluated at.

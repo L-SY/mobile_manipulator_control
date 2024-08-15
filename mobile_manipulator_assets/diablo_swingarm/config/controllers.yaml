@@ -9,11 +9,12 @@ controllers:
       x: 0.3
       y: 0.0
       z: 0.3
+    lp_cutoff_frequency: 100
     arm_urdf: /home/lsy/mobile_manipulator_control/src/mobile_manipulator_assets/swing_arm/description/urdf/robot.urdf
     gains:
       joint1: { p: 10, i: 0.0, d: 0.2, i_clamp_max: 0., i_clamp_min: 0.., antiwindup: true, publish_state: true }
       joint2: { p: 50, i: 0.0, d: 5, i_clamp_max: 0., i_clamp_min: 0., antiwindup: true, publish_state: true }
       joint3: { p: 50, i: 0.0, d: 5, i_clamp_max: 0., i_clamp_min: 0., antiwindup: true, publish_state: true }
       joint4: { p: 10, i: 0.0, d: 0.2, i_clamp_max: 0., i_clamp_min: 0, antiwindup: true, publish_state: true }
-      joint5: { p: 1, i: 0., d: 0.04, i_clamp_max: 0., i_clamp_min: 0, antiwindup: true, publish_state: true }
+      joint5: { p: 0.5, i: 0., d: 0.01, i_clamp_max: 0., i_clamp_min: 0, antiwindup: true, publish_state: true }
       joint6: { p: 0.5, i: 0., d: 0.01, i_clamp_max: 0., i_clamp_min: 0., antiwindup: true, publish_state: true }
