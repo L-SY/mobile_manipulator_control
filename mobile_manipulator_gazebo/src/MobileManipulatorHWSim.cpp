@@ -39,13 +39,16 @@ bool MobileManipulatorHWSim::initSim(const std::string& robot_namespace, ros::No
       hardware_interface::JointStateHandle state_handle(baseVelDates_.back().name_, &baseVelDates_.back().pos_, &baseVelDates_.back().vel_, &baseVelDates_.back().tau_);
       baseVelDates_.back().pos_ = 0;
       baseVelDates_.back().vel_ = 0;
-      baseVelDates_.back().tau_ = 0;
       js_interface_.registerHandle(state_handle);
       hardware_interface::JointHandle joint_handle(state_handle, &baseVelDates_.back().velDes_);
       vj_interface_.registerHandle(joint_handle);
       ROS_INFO_STREAM(name);
     }
   }
+//  if (!model_nh.getParam("gazebo/wheel_joint", wheelJointNames_))
+//  {
+//    ROS_INFO_STREAM("Parameter 'gazebo/wheel_joint' not found");
+//  }
   registerInterface(&robotStateInterface_);
   registerInterface(&imuSensorInterface_);
   XmlRpc::XmlRpcValue xmlRpcValue;
@@ -162,6 +165,15 @@ void MobileManipulatorHWSim::readSim(ros::Time time, ros::Duration period)
       joint.ff_ = 0.;
     }
   }
+//  if (!baseVelDates_.empty())
+//  {
+//    auto baseX = vj_interface_.getHandle(baseVelNames_[0]);
+//    auto baseY = vj_interface_.getHandle(baseVelNames_[1]);
+//    auto baseYaw = vj_interface_.getHandle(baseVelNames_[2]);
+//    auto leftWheel = vj_interface_.getHandle(wheelJointNames_[0]);
+//    auto rightWheel = vj_interface_.getHandle(wheelJointNames_[1]);
+    // TODO : maybe add setPos and vel
+//  }
 }
 
 void MobileManipulatorHWSim::writeSim(ros::Time time, ros::Duration period)
@@ -192,6 +204,16 @@ void MobileManipulatorHWSim::writeSim(ros::Time time, ros::Duration period)
                               cmd.kd_ * (cmd.velDes_ - joint.joint_.getVelocity()) + cmd.ff_);
     }
   }
+//  if (!baseVelDates_.empty())
+//  {
+//    auto baseX = vj_interface_.getHandle(baseVelNames_[0]);
+//    auto baseY = vj_interface_.getHandle(baseVelNames_[1]);
+//    auto baseYaw = vj_interface_.getHandle(baseVelNames_[2]);
+//    auto leftWheel = vj_interface_.getHandle(wheelJointNames_[0]);
+//    auto rightWheel = vj_interface_.getHandle(wheelJointNames_[1]);
+//    leftWheel.setCommand(baseX.getCommand() - baseYaw.getCommand());
+//    rightWheel.setCommand(baseX.getCommand() + baseYaw.getCommand());
+//  }
   DefaultRobotHWSim::writeSim(time, period);
 }
 

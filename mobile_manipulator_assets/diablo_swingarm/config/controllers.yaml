@@ -3,6 +3,10 @@ controllers:
     type: joint_state_controller/JointStateController
     publish_rate: 100
 
+  robot_state_controller:
+    type: robot_state_controller/RobotStateController
+    publish_rate: 100
+
   mobile_manipulator_controller:
     type: ddt/UprightController
     init_pos:
@@ -15,6 +19,6 @@ controllers:
       joint1: { p: 10, i: 0.0, d: 0.2, i_clamp_max: 0., i_clamp_min: 0.., antiwindup: true, publish_state: true }
       joint2: { p: 50, i: 0.0, d: 5, i_clamp_max: 0., i_clamp_min: 0., antiwindup: true, publish_state: true }
       joint3: { p: 50, i: 0.0, d: 5, i_clamp_max: 0., i_clamp_min: 0., antiwindup: true, publish_state: true }
-      joint4: { p: 10, i: 0.0, d: 0.2, i_clamp_max: 0., i_clamp_min: 0, antiwindup: true, publish_state: true }
+      joint4: { p: 5, i: 0.0, d: 0.1, i_clamp_max: 0., i_clamp_min: 0, antiwindup: true, publish_state: true }
       joint5: { p: 0.5, i: 0., d: 0.01, i_clamp_max: 0., i_clamp_min: 0, antiwindup: true, publish_state: true }
       joint6: { p: 0.5, i: 0., d: 0.01, i_clamp_max: 0., i_clamp_min: 0., antiwindup: true, publish_state: true }

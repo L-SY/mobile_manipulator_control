@@ -17,3 +17,14 @@ gazebo:
     - baseX
     - baseY
     - baseYaw
+
+gazebo_ros_control:
+  pid_gains:
+    left_j3:
+      p: 3
+      i: 0.0
+      d: 0.0
+    right_j3:
+      p: 3
+      i: 0.0
+      d: 0.0

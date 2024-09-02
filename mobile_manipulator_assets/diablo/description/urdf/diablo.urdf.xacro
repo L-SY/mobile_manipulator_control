@@ -11,7 +11,8 @@
     <xacro:create_link name="diablo_base_link" mass="11.639" ixx="0.071628" ixy="-5.9879E-09" ixz="-0.00097471"
                        iyy="0.16274" iyz="-1.6369E-08" izz="0.14673"
                        mesh_file="package://diablo/description/meshes/base_link.stl"
-                       material_name="grey" scale_factor="1" vision_scale_x="0.1" vision_scale_y="0.1" vision_scale_z="0.1"/>
+                       material_name="grey" scale_factor="1" vision_scale_x="0.1" vision_scale_y="0.1" vision_scale_z="0.1"
+                       collision_scale_x="0.1" collision_scale_y="0.001" collision_scale_z="0.1"/>
 
     <xacro:IMU connected_to="diablo_base_link" imu_name="base_imu" mesh_file="package://robot_common/include/robot_common/utilities/urdf/imu.stl" xyz="0.00 0.00 0.00"
                rpy="0.00 0.00 0.00"/>
@@ -163,6 +164,29 @@
     <gazebo reference="right_wheel">
         <material>Gazebo/Purple</material>
     </gazebo>
+
+    <gazebo reference="diablo_base_link">
+        <material>
+            <friction>
+                <ode>
+                    <mu>0.0</mu>  <!-- 设置mu1为0 -->
+                    <mu2>0.0</mu2>  <!-- 设置mu2为0 -->
+                </ode>
+            </friction>
+        </material>
+        <self_collide>false</self_collide>  <!-- 设置为false -->
+        <kp>1000000.0</kp>  <!-- 接触刚度参数 -->
+        <kd>10.0</kd>  <!-- 接触阻尼参数 -->
+    </gazebo>
+
+
+    <!--    <gazebo reference="diablo_base_link">-->
+<!--        <mu1>0.</mu1>-->
+<!--        <mu2>0.</mu2>-->
+<!--        <self_collide>0</self_collide>-->
+<!--        <kp value="1000000.0"/>-->
+<!--        <kd value="10.0"/>-->
+<!--    </gazebo>-->
 
 <!--    <gazebo>-->
 <!--        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">-->

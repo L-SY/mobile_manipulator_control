@@ -51,6 +51,8 @@ bool UprightController::init(hardware_interface::RobotHW* robot_hw, ros::NodeHan
   velocityJointHandles_.push_back(velocityJointInterface->getHandle("baseX"));
   velocityJointHandles_.push_back(velocityJointInterface->getHandle("baseY"));
   velocityJointHandles_.push_back(velocityJointInterface->getHandle("baseYaw"));
+  wheelJointHandles_.push_back(velocityJointInterface->getHandle("left_j3"));
+  wheelJointHandles_.push_back(velocityJointInterface->getHandle("right_j3"));
 
   auto* effortJointInterface = robot_hw->get<hardware_interface::EffortJointInterface>();
   auto* hybridJointInterface = robot_hw->get<hardware_interface::HybridJointInterface>();
@@ -169,21 +171,27 @@ void UprightController::update(const ros::Time& time, const ros::Duration& perio
 
   // Publish the observation. Only needed for the command interface
   observationPublisher_.publish(ocs2::ros_msg_conversions::createObservationMsg(currentObservation_));
+  lastTime_ = ros::Time::now();
 }
 
 void UprightController::updateTfOdom(const ros::Time& time, const ros::Duration& period)
 {
   odom2base_.header.stamp = time;
-  double yaw = velocityJointHandles_[2].getPosition();
+//  double yaw = velocityJointHandles_[2].getPosition();
+  yaw_ += (wheelJointHandles_[0].getVelocity()-wheelJointHandles_[1].getVelocity()) *  (time.toSec() - lastTime_.toSec());
   tf2::Quaternion quaternion;
-  quaternion.setRPY(0, 0, yaw);
+//  quaternion.setRPY(0, 0, yaw);
+  quaternion.setRPY(0, 0, yaw_);
   odom2base_.transform.rotation.x = quaternion.x();
   odom2base_.transform.rotation.y = quaternion.y();
   odom2base_.transform.rotation.z = quaternion.z();
   odom2base_.transform.rotation.w = quaternion.w();
 
-  odom2base_.transform.translation.x = velocityJointHandles_[0].getPosition();
-  odom2base_.transform.translation.y = velocityJointHandles_[1].getPosition();
+//  odom2base_.transform.translation.x = velocityJointHandles_[0].getPosition();
+//  odom2base_.transform.translation.y = velocityJointHandles_[1].getPosition();
+  double carXs = (wheelJointHandles_[0].getVelocity()+wheelJointHandles_[1].getVelocity()) / 2  *  (time.toSec() - lastTime_.toSec());
+  odom2base_.transform.translation.x += carXs * sin(yaw_);
+  odom2base_.transform.translation.y += carXs * cos(yaw_);
   odom2base_.transform.translation.z = 0;
 
   tfRtBroadcaster_.sendTransform(odom2base_);
@@ -192,16 +200,27 @@ void UprightController::updateTfOdom(const ros::Time& time, const ros::Duration&
 void UprightController::updateStateEstimation(const ros::Time& time, const ros::Duration& period)
 {
   //  Diablo odom info
-  currentObservation_.state(0) = velocityJointHandles_[0].getPosition();
-  currentObservation_.state(1) = velocityJointHandles_[1].getPosition();
-  currentObservation_.state(2) = velocityJointHandles_[2].getPosition();
+  currentObservation_.state(0) = odom2base_.transform.translation.x;
+  currentObservation_.state(1) = odom2base_.transform.translation.y;
+  currentObservation_.state(2) = yaw_;
 
-  currentObservation_.state(9) = velocityJointHandles_[0].getVelocity();
-  currentObservation_.state(10) = velocityJointHandles_[2].getPosition();
+  if (updatePolicy_)
+  {
+    currentObservation_.state(9) = (wheelJointHandles_[0].getVelocity() + wheelJointHandles_[1].getVelocity())/2;
+    currentObservation_.state(10) = wheelJointHandles_[0].getVelocity() - wheelJointHandles_[1].getVelocity();
+    //  All accs are set to zero due to ros:: inaccurate and unstable time
+    currentObservation_.state(17) = mpcMrtInterface_.get()->getPolicy().stateTrajectory_[1](18);
+    currentObservation_.state(18) = mpcMrtInterface_.get()->getPolicy().stateTrajectory_[1](18);
+  }
+  else
+  {
+    currentObservation_.state(9) = 0;
+    currentObservation_.state(10) =0.;
+    currentObservation_.state(17) = 0;
+    currentObservation_.state(18) =0.;
+  }
 
-  //  All accs are set to zero due to ros:: inaccurate and unstable time
-  currentObservation_.state(17) = 0;
-  currentObservation_.state(18) = 0;
+
 
   std_msgs::Float64MultiArray velOutMsg;
   //  arm info
@@ -375,9 +394,11 @@ void UprightController::upright(const ros::Time& time, const ros::Duration& peri
   //  for diablo control
 //  velocityJointHandles_[0].setCommand(optimizedState(9));
 //  velocityJointHandles_[2].setCommand(optimizedState(10));
-
-  velocityJointHandles_[0].setCommand(0);
-  velocityJointHandles_[2].setCommand(0);
+  wheelJointHandles_[0].setCommand(optimizedState(9) - optimizedState(10));
+  wheelJointHandles_[1].setCommand(optimizedState(9) + optimizedState(10));
+  ROS_INFO_STREAM(optimizedState(9));
+//  velocityJointHandles_[0].setCommand(0);
+//  velocityJointHandles_[2].setCommand(0);
 
   ocs2::PrimalSolution wholeSolution = mpcMrtInterface_->getPolicy();
   auto stateTrajectory = wholeSolution.stateTrajectory_;

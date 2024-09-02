@@ -140,11 +140,11 @@ private:
   ocs2::vector_t jointVelLast_{};
   ros::Time lastTime_{};
 
-  double init_x_, init_y_, init_z_;
+  double init_x_, init_y_, init_z_, yaw_;
   std::vector<hardware_interface::HybridJointHandle> hybridJointHandles_;
   std::vector<hardware_interface::JointHandle> effortJointHandles_;
   std::vector<hardware_interface::JointHandle> velocityJointHandles_;
-
+  std::vector<hardware_interface::JointHandle> wheelJointHandles_;
   // Use for gravity compensation
   std::shared_ptr<arm_pinocchio::PinocchioInterface> pinocchioInterface_;
   std::shared_ptr<arm_pinocchio::EndEffectorInterface<double>> endEffectorInterface_;

@@ -57,7 +57,7 @@ private:
   hardware_interface::ImuSensorInterface imuSensorInterface_;
   std::list<ImuData> imuDatas_;
 
-  std::vector<std::string> hybridJoints_, baseVelNames_;
+  std::vector<std::string> hybridJoints_, baseVelNames_, wheelJointNames_;
   hardware_interface::HybridJointInterface hybridJointInterface_;
   std::list<HybridJointData> hybridJointDatas_;
   std::list<BaseVelData> baseVelDates_;

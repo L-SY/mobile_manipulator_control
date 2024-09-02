@@ -114,10 +114,10 @@ Cost
 {
   input  ; input weight
   {
-    scaling 1e-1        ; scaling coefficient for the whole weight matrix
+    scaling 1e-2        ; scaling coefficient for the whole weight matrix
     ; weight matrix diagonal
-    (0,0) 10000    ; M(0,0)
-    (1,1) 10000    ; M(1,1)
+    (0,0) 50000    ; M(0,0)
+    (1,1) 50000    ; M(1,1)
     (2,2) 10.0    ; M(2,2)
     (3,3) 5.0    ; M(3,3)
     (4,4) 5.0    ; M(4,4)
@@ -130,12 +130,12 @@ Cost
     scaling 1e+0
 
     ; the pos weight
-    (0,0) 10   ; M(0,0)
-    (1,1) 10    ; M(1,1)
-    (2,2) 10    ; M(2,2)
-    (3,3) 0.2    ; M(3,3)
-    (4,4) 0.2    ; M(4,4)
-    (5,5) 0.2    ; M(5,5)
+    (0,0) 0   ; M(0,0)
+    (1,1) 0    ; M(1,1)
+    (2,2) 0    ; M(2,2)
+    (3,3) 5    ; M(3,3)
+    (4,4) 5    ; M(4,4)
+    (5,5) 5    ; M(5,5)
     (6,6) 20    ; M(6,6)
     (7,7) 20    ; M(7,7)
     (8,8) 20    ; M(8,8)
@@ -162,7 +162,7 @@ Cost
   }
   end_effector  ; EE pose weight
   {
-    scaling 1e+4
+    scaling 1e+5
     ; 3 position DOFs, 3 orientation DOFs
     (0,0) 2.0    ; M(0,0)
     (1,1) 1.0    ; M(1,1)
@@ -251,9 +251,9 @@ Constraint
         state_lower
         {
           scaling 1e+0
-          (0,0) -10.0   ; state_lower_1
-          (1,0) -10.0   ; state_lower_2
-          (2,0) -10.0   ; state_lower_3
+          (0,0) -100.0   ; state_lower_1
+          (1,0) -100.0   ; state_lower_2
+          (2,0) -100.0   ; state_lower_3
           (3,0) -1.57  ; state_lower_4 (joint1)
           (4,0) 0  ; state_lower_5 (joint2)
           (5,0) -3.14  ; state_lower_6 (joint3)
@@ -262,28 +262,28 @@ Constraint
           (8,0) -1.57  ; state_lower_9 (joint6)
           (9,0) -1.5    ; state_lower_10
           (10,0) -1.5   ; state_lower_11
-          (11,0) -1.5   ; state_lower_12 (joint1)
-          (12,0) -1.5   ; state_lower_13
-          (13,0) -1.5   ; state_lower_14
-          (14,0) -3.0   ; state_lower_15
-          (15,0) -3.0   ; state_lower_16
-          (16,0) -3.0   ; state_lower_17 (joint6)
+          (11,0) -3.7   ; state_lower_12 (joint1)
+          (12,0) -3.7   ; state_lower_13
+          (13,0) -3.7   ; state_lower_14
+          (14,0) -12.56   ; state_lower_15
+          (15,0) -12.56   ; state_lower_16
+          (16,0) -12.56   ; state_lower_17 (joint6)
           (17,0) -1.5   ; state_lower_18
           (18,0) -1.5   ; state_lower_19
-          (19,0) -1.5   ; state_lower_20 (joint1)
-          (20,0) -1.5   ; state_lower_21
-          (21,0) -1.5  ; state_lower_22
-          (22,0) -1.5  ; state_lower_23
-          (23,0) -1.5  ; state_lower_24
-          (24,0) -1.5  ; state_lower_25 (joint6)
+          (19,0) -3   ; state_lower_20 (joint1)
+          (20,0) -3   ; state_lower_21
+          (21,0) -3  ; state_lower_22
+          (22,0) -6 ; state_lower_23
+          (23,0) -6  ; state_lower_24
+          (24,0) -6  ; state_lower_25 (joint6)
         }
 
         state_upper
         {
           scaling 1e+0
-          (0,0) 10.0   ; state_lower_1
-          (1,0) 10.0   ; state_lower_2
-          (2,0) 10.0   ; state_lower_3
+          (0,0) 100.0   ; state_lower_1
+          (1,0) 100.0   ; state_lower_2
+          (2,0) 100.0   ; state_lower_3
           (3,0) 1.57  ; state_lower_4 (joint1)
           (4,0) 3.14  ; state_lower_5 (joint2)
           (5,0) 0.  ; state_lower_6 (joint3)
@@ -292,20 +292,20 @@ Constraint
           (8,0) 1.57  ; state_lower_9 (joint6)
           (9,0) 1.5    ; state_lower_10
           (10,0) 1.5   ; state_lower_11
-          (11,0) 1.5   ; state_lower_12 (joint1)
-          (12,0) 1.5   ; state_lower_13
-          (13,0) 1.5   ; state_lower_14
-          (14,0) 3.0   ; state_lower_15
-          (15,0) 3.0   ; state_lower_16
-          (16,0) 3.0   ; state_lower_17 (joint6)
+          (11,0) 3.7   ; state_lower_12 (joint1)
+          (12,0) 3.7   ; state_lower_13
+          (13,0) 3.7   ; state_lower_14
+          (14,0) 12.56   ; state_lower_15
+          (15,0) 12.56   ; state_lower_16
+          (16,0) 12.56   ; state_lower_17 (joint6)
           (17,0) 1.5   ; state_lower_18
           (18,0) 1.5   ; state_lower_19
-          (19,0) 1.5   ; state_lower_20 (joint1)
-          (20,0) 1.5   ; state_lower_21
-          (21,0) 1.5  ; state_lower_22
-          (22,0) 1.5  ; state_lower_23
-          (23,0) 1.5  ; state_lower_24
-          (24,0) 1.5  ; state_lower_25 (joint6)
+          (19,0) 3   ; state_lower_20 (joint1)
+          (20,0) 3   ; state_lower_21
+          (21,0) 3  ; state_lower_22
+          (22,0) 6  ; state_lower_23
+          (23,0) 6  ; state_lower_24
+          (24,0) 6  ; state_lower_25 (joint6)
         }
     }
 
@@ -336,7 +336,7 @@ Constraint
 
 inertial_alignment
 {
-  cost_enabled false
+  cost_enabled true
   constraint_enabled false
   ; take angular acceleration into account (only has an affect if com has non-zero height)
   use_angular_acceleration true
