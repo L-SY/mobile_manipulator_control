@@ -1,16 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="wlm">
-
-    <xacro:arg name="robot_type" default="ddt"/>
-
     <!-- manipulatior -->
     <xacro:include filename="$(find swing_arm)/description/urdf/robot.xacro"/>
-
-    <joint name="manipulator_joint" type="fixed">
-        <parent link="diablo_base_link"/>
-        <child link="arm_base_link"/>
-        <origin xyz="0.0 0.0 0.1" rpy="0.0 0.0 0.0"/>
-    </joint>
 
     <xacro:arg name="load_chassis" default="true"/>
     <xacro:arg name="fixed_leg" default="true"/>
@@ -21,12 +12,12 @@
         <xacro:chassis fixed_wheel="$(arg fixed_wheel)" fixed_leg="$(arg fixed_leg)"/>
     </xacro:if>
 
-<!--    <gazebo>-->
-<!--        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">-->
-<!--            <robotNamespace>/</robotNamespace>-->
-<!--            <robotParam>mobile_manipulator_description</robotParam>-->
-<!--        </plugin>-->
-<!--    </gazebo>-->
+    <joint name="manipulator_joint" type="fixed">
+        <parent link="diablo_base_link"/>
+        <child link="arm_base_link"/>
+        <origin xyz="0.0 0.0 0.1" rpy="0.0 0.0 0.0"/>
+    </joint>
+
     <gazebo>
         <plugin name="gazebo_ros_control" filename="libmobile_manipulator_hw_sim.so">
             <robotNamespace>/</robotNamespace>

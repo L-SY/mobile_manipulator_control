@@ -5,13 +5,7 @@
     <param name="mobile_manipulator_description"
            command="$(find xacro)/xacro $(find diablo_swingarm)/description/urdf/gazebo_robot.xacro"/>
 
-    <param name="gazebo_description"
-           command="$(find xacro)/xacro $(find diablo_swingarm)/description/urdf/gazebo_robot.xacro"/>
-
     <rosparam file="$(find diablo_swingarm)/config/gazebo.yaml" command="load"/>
-
-    <param name="wlm_description"
-           command="$(find xacro)/xacro $(find diablo_swingarm)/description/urdf/robot.xacro"/>
 
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="world_name" value="$(find robot_gazebo)/worlds/empty_world.world"/>

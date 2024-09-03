@@ -5,8 +5,8 @@
     <xacro:arg name="robot_type" default="diablo"/>
 
     <xacro:arg name="load_chassis" default="true"/>
-    <xacro:arg name="fixed_leg" default="false"/>
-    <xacro:arg name="fixed_wheel" default="true"/>
+    <xacro:arg name="fixed_leg" default="true"/>
+    <xacro:arg name="fixed_wheel" default="false"/>
 
     <xacro:if value="$(arg load_chassis)">
         <xacro:include filename="$(find diablo)/description/urdf/diablo.urdf.xacro"/>
